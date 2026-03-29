@@ -1,3 +1,5 @@
+import { asset } from "@/lib/utils";
+
 export const skills = [
   "Product Design",
   "UX / UI",
@@ -19,12 +21,12 @@ export interface ToolItem {
 }
 
 export const tools: ToolItem[] = [
-  { name: "Figma", icon: "/images/tools/figma.png" },
-  { name: "Claude", icon: "/images/tools/claude.png" },
-  { name: "Codex", icon: "/images/tools/codex.png" },
-  { name: "Paper", icon: "/images/tools/paper.png" },
-  { name: "Notion", icon: "/images/tools/notion.png" },
-  { name: "Dia", icon: "/images/tools/dia.png" },
+  { name: "Figma", icon: asset("/images/tools/figma.png") },
+  { name: "Claude", icon: asset("/images/tools/claude.png") },
+  { name: "Codex", icon: asset("/images/tools/codex.png") },
+  { name: "Paper", icon: asset("/images/tools/paper.png") },
+  { name: "Notion", icon: asset("/images/tools/notion.png") },
+  { name: "Dia", icon: asset("/images/tools/dia.png") },
 ];
 
 export const companies = ["Brainrocket", "MyCrew", "Upside Analytics"];
@@ -44,14 +46,14 @@ export const experience: ExperienceItem[] = [
     role: "Senior Product Designer",
     period: "Oct 2024 — Present",
     location: "Limassol, Cyprus",
-    logo: "/images/companies/brainrocket.png",
+    logo: asset("/images/companies/brainrocket.png"),
   },
   {
     company: "Brainrocket",
     role: "Product Designer",
     period: "Jul 2023 — Oct 2024",
     location: "Limassol, Cyprus",
-    logo: "/images/companies/brainrocket.png",
+    logo: asset("/images/companies/brainrocket.png"),
     link: "https://brainrocket.com",
   },
   {
@@ -59,7 +61,7 @@ export const experience: ExperienceItem[] = [
     role: "Product Designer",
     period: "Dec 2022 — Jun 2023",
     location: "Remote, Cyprus",
-    logo: "/images/companies/mycrew.png",
+    logo: asset("/images/companies/mycrew.png"),
     link: "https://mycrew.com",
   },
   {
@@ -67,6 +69,6 @@ export const experience: ExperienceItem[] = [
     role: "UX/UI Designer",
     period: "Nov 2020 — Feb 2022",
     location: "Russia",
-    logo: "/images/companies/upside-analytics.png",
+    logo: asset("/images/companies/upside-analytics.png"),
   },
 ];

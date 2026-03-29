@@ -1,3 +1,5 @@
+import { asset } from "@/lib/utils";
+
 export interface Project {
   slug: string;
   title: string;
@@ -18,7 +20,7 @@ export const projects: Project[] = [
     tags: ["Design Systems", "Tokens", "Theming"],
     year: "2024",
     role: "Senior Product Designer",
-    thumbnail: "/images/projects/project-1.png",
+    thumbnail: asset("/images/projects/project-1.png"),
     type: "case",
   },
   {
@@ -29,7 +31,7 @@ export const projects: Project[] = [
     tags: ["Product Design", "Mobile", "UX"],
     year: "2024",
     role: "Senior Product Designer",
-    thumbnail: "/images/projects/soulmate.png",
+    thumbnail: asset("/images/projects/soulmate.png"),
     type: "image",
   },
   {
@@ -40,7 +42,7 @@ export const projects: Project[] = [
     tags: ["Product Design", "Web", "AI"],
     year: "2024",
     role: "Senior Product Designer",
-    thumbnail: "/images/projects/viante.png",
+    thumbnail: asset("/images/projects/viante.png"),
     type: "image",
   },
   {
@@ -51,7 +53,7 @@ export const projects: Project[] = [
     tags: ["Product Design", "Mobile", "UX"],
     year: "2024",
     role: "Senior Product Designer",
-    thumbnail: "/images/projects/diary-app.png",
+    thumbnail: asset("/images/projects/diary-app.png"),
     type: "image",
   },
   {
@@ -62,7 +64,7 @@ export const projects: Project[] = [
     tags: ["E-commerce", "Redesign", "Mobile"],
     year: "2022",
     role: "Product Designer",
-    thumbnail: "/images/projects/fyxation-phones.png",
+    thumbnail: asset("/images/projects/fyxation-phones.png"),
     type: "image",
   },
   {
@@ -73,7 +75,7 @@ export const projects: Project[] = [
     tags: ["Product Design", "Fintech", "Web"],
     year: "2023",
     role: "Product Designer",
-    thumbnail: "/images/projects/pickthebank.png",
+    thumbnail: asset("/images/projects/pickthebank.png"),
     type: "image",
   },
   {
@@ -84,7 +86,7 @@ export const projects: Project[] = [
     tags: ["Product Design", "Crypto", "Mobile"],
     year: "2023",
     role: "Product Designer",
-    thumbnail: "/images/projects/trading-app.png",
+    thumbnail: asset("/images/projects/trading-app.png"),
     type: "image",
   },
   {
@@ -95,7 +97,7 @@ export const projects: Project[] = [
     tags: ["Product Design", "iOS", "Crypto"],
     year: "2023",
     role: "Product Designer",
-    thumbnail: "/images/projects/crypto-widgets.png",
+    thumbnail: asset("/images/projects/crypto-widgets.png"),
     type: "image",
   },
   {
@@ -106,7 +108,7 @@ export const projects: Project[] = [
     tags: ["Design Engineering", "Figma API", "Tooling"],
     year: "2024",
     role: "Design Engineer",
-    thumbnail: "/images/projects/layersweep-cover.png",
+    thumbnail: asset("/images/projects/layersweep-cover.png"),
     type: "case",
   },
   {
@@ -117,7 +119,7 @@ export const projects: Project[] = [
     tags: ["Product Design", "iGaming", "Mobile"],
     year: "2023",
     role: "Senior Product Designer",
-    thumbnail: "/images/projects/project-3.png",
+    thumbnail: asset("/images/projects/project-3.png"),
     type: "case",
   },
   {
@@ -128,7 +130,7 @@ export const projects: Project[] = [
     tags: ["Product Design", "iGaming", "Branding"],
     year: "2022–2024",
     role: "Product → Senior → Lead Designer",
-    thumbnail: "/images/projects/brainrocket-showcase.png",
+    thumbnail: asset("/images/projects/brainrocket-showcase.png"),
     type: "case",
   },
 ];

@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { AnimateIn } from "@/components/animate-in";
+import { asset } from "@/lib/utils";
 
 export function Sidebar() {
   return (
@@ -7,7 +8,7 @@ export function Sidebar() {
       <AnimateIn>
         <div className="flex items-center gap-3">
           <Image
-            src="/images/headshot.png"
+            src={asset("/images/headshot.png")}
             alt="Eugene Kravchenko"
             width={48}
             height={48}
