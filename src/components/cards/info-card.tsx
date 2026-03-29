@@ -3,6 +3,7 @@
 import { useCallback, useRef, useState } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
+import { asset } from "@/lib/utils";
 import type { InfoCard as InfoCardType } from "@/data/grid-items";
 
 interface InfoCardProps {
@@ -32,7 +33,7 @@ function ToolsCard({ item }: InfoCardProps) {
 
   const playPop = useCallback(() => {
     if (!audioRef.current) {
-      audioRef.current = new Audio("/sounds/pop.wav");
+      audioRef.current = new Audio(asset("/sounds/pop.wav"));
       audioRef.current.volume = 0.3;
     }
     audioRef.current.currentTime = 0;
@@ -151,7 +152,7 @@ function ExperienceCard({ item }: InfoCardProps) {
 
   const playPop = useCallback(() => {
     if (!audioRef.current) {
-      audioRef.current = new Audio("/sounds/pop.wav");
+      audioRef.current = new Audio(asset("/sounds/pop.wav"));
       audioRef.current.volume = 0.3;
     }
     audioRef.current.currentTime = 0;
