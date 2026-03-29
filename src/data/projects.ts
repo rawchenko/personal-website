@@ -1,0 +1,138 @@
+export interface Project {
+  slug: string;
+  title: string;
+  description: string;
+  tags: string[];
+  year: string;
+  role: string;
+  thumbnail: string;
+  type: "case" | "image";
+}
+
+export const projects: Project[] = [
+  {
+    slug: "design-system",
+    title: "Multi-Brand Design System",
+    description:
+      "Developed and maintained a design system with tokens, typography, spacing, and iconography powering 100+ brands.",
+    tags: ["Design Systems", "Tokens", "Theming"],
+    year: "2024",
+    role: "Senior Product Designer",
+    thumbnail: "/images/projects/project-1.png",
+    type: "case",
+  },
+  {
+    slug: "soulmate",
+    title: "Soulmate — Relationship App",
+    description:
+      "Designed a relationship wellness app with daily activities, quizzes, and a calming mobile-first experience.",
+    tags: ["Product Design", "Mobile", "UX"],
+    year: "2024",
+    role: "Senior Product Designer",
+    thumbnail: "/images/projects/soulmate.png",
+    type: "image",
+  },
+  {
+    slug: "viante",
+    title: "Soulmate — UI Design",
+    description:
+      "Designed the marketing site and product pages for an AI-powered identity verification platform.",
+    tags: ["Product Design", "Web", "AI"],
+    year: "2024",
+    role: "Senior Product Designer",
+    thumbnail: "/images/projects/viante.png",
+    type: "image",
+  },
+  {
+    slug: "diary-app",
+    title: "Diary App",
+    description:
+      "Designed a personal diary and journaling app with daily prompts, weekly recaps, and a calming mobile-first experience.",
+    tags: ["Product Design", "Mobile", "UX"],
+    year: "2024",
+    role: "Senior Product Designer",
+    thumbnail: "/images/projects/diary-app.png",
+    type: "image",
+  },
+  {
+    slug: "fyxation",
+    title: "Fyxation — E-commerce Redesign",
+    description:
+      "Redesigned an e-commerce experience for a bicycle brand with product pages, cart flow, and mobile-first approach.",
+    tags: ["E-commerce", "Redesign", "Mobile"],
+    year: "2022",
+    role: "Product Designer",
+    thumbnail: "/images/projects/fyxation-phones.png",
+    type: "image",
+  },
+  {
+    slug: "pickthebank",
+    title: "PickTheBank — Bank Comparison",
+    description:
+      "Designed a bank deposit comparison platform with detailed product pages and data-driven UI.",
+    tags: ["Product Design", "Fintech", "Web"],
+    year: "2023",
+    role: "Product Designer",
+    thumbnail: "/images/projects/pickthebank.png",
+    type: "image",
+  },
+  {
+    slug: "trading-app",
+    title: "Crypto Trading App",
+    description:
+      "Designed a token swap interface for a crypto trading platform with dark theme and real-time data.",
+    tags: ["Product Design", "Crypto", "Mobile"],
+    year: "2023",
+    role: "Product Designer",
+    thumbnail: "/images/projects/trading-app.png",
+    type: "image",
+  },
+  {
+    slug: "crypto-widgets",
+    title: "Crypto Widgets",
+    description:
+      "Designed iOS widgets for tracking cryptocurrency prices with real-time charts and portfolio data.",
+    tags: ["Product Design", "iOS", "Crypto"],
+    year: "2023",
+    role: "Product Designer",
+    thumbnail: "/images/projects/crypto-widgets.png",
+    type: "image",
+  },
+  {
+    slug: "layersweep",
+    title: "LayerSweep — Figma Plugin",
+    description:
+      "Built a Figma plugin for bulk style replacement that automates design system migrations. Published on Figma Community with 200+ users.",
+    tags: ["Design Engineering", "Figma API", "Tooling"],
+    year: "2024",
+    role: "Design Engineer",
+    thumbnail: "/images/projects/layersweep-cover.png",
+    type: "case",
+  },
+  {
+    slug: "casino-brand",
+    title: "Swiper — Casino with Shorts Feed",
+    description:
+      "Designed a TikTok-style casino product with an infinite shorts feed, sportsbook, and full brand identity across web and mobile.",
+    tags: ["Product Design", "iGaming", "Mobile"],
+    year: "2023",
+    role: "Senior Product Designer",
+    thumbnail: "/images/projects/project-3.png",
+    type: "case",
+  },
+  {
+    slug: "brainrocket-showcase",
+    title: "Brainrocket — iGaming Brand Showcase",
+    description:
+      "A selection of 9 iGaming brands I designed — from product design on individual brands to leading a brand from scratch.",
+    tags: ["Product Design", "iGaming", "Branding"],
+    year: "2022–2024",
+    role: "Product → Senior → Lead Designer",
+    thumbnail: "/images/projects/brainrocket-showcase.png",
+    type: "case",
+  },
+];
+
+export function getProjectBySlug(slug: string): Project | undefined {
+  return projects.find((p) => p.slug === slug);
+}
