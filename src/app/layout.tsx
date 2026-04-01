@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { Agentation } from "agentation";
-import { GradualBlur } from "@/components/gradual-blur";
 import "./globals.css";
 
 const inter = Inter({
@@ -31,7 +30,6 @@ export default function RootLayout({
         <div className="max-w-[1440px] mx-auto">
           <main>{children}</main>
         </div>
-        <GradualBlur />
         {process.env.NODE_ENV === "development" && <Agentation />}
       </body>
     </html>

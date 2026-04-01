@@ -1,12 +1,13 @@
-import { PageLayout } from "@/components/page-layout";
-import { Sidebar } from "@/components/sidebar";
-import { ContentGrid } from "@/components/content-grid";
-import { gridItems } from "@/data/grid-items";
+import { PageLayout } from "@/components/v2/page-layout";
+import { Info } from "@/components/v2/info";
+import { Portfolio } from "@/components/v2/portfolio";
+
 
 export default function HomePage() {
   return (
-    <PageLayout sidebar={<Sidebar />}>
-      <ContentGrid items={gridItems} />
-    </PageLayout>
+    <PageLayout
+      info={<Info />}
+      portfolio={<Portfolio />}
+    />
   );
 }
