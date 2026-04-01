@@ -14,7 +14,7 @@ const iconShadow =
 export function Info() {
   return (
     <div
-      className="flex flex-col gap-6 px-4 py-6 desktop:p-4"
+      className="flex flex-col gap-6 px-4 py-6"
       style={{ containerType: "inline-size" }}
     >
       <AnimateIn>
