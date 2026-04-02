@@ -98,33 +98,33 @@ export function CaseCard({ projectSlug, label, description, dark, background, sh
               className="object-cover z-10 group-hover:scale-[1.02] transition-transform duration-300"
             />
           )}
-          {/* Info bar */}
-          <div className="absolute bottom-4 left-4 right-4 z-20 flex items-center justify-between">
-            <div className="flex items-center gap-1">
-              <span className={`text-sm font-semibold tracking-[-0.03em] ${textColor}`}>
-                {label}
-              </span>
-              <span className={`text-sm font-semibold tracking-[-0.03em] ${mutedColor}`}>
-                {description}
-              </span>
-            </div>
-            <div className={`flex items-center text-sm font-semibold tracking-[-0.03em] ${textColor}`}>
-              Read more
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="16"
-                height="16"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke={strokeColor}
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <path d="M5 12h14" />
-                <path d="m12 5 7 7-7 7" />
-              </svg>
-            </div>
+        </div>
+        {/* Info bar */}
+        <div className="flex items-center justify-between pt-3">
+          <div className="flex items-center gap-1">
+            <span className="text-sm font-semibold tracking-[-0.03em] text-[#343434]">
+              {label}
+            </span>
+            <span className="text-sm font-semibold tracking-[-0.03em] text-[#343434]/50">
+              {description}
+            </span>
+          </div>
+          <div className="flex items-center text-sm font-semibold tracking-[-0.03em] text-[#343434]">
+            Read more
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="#343434"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <path d="M5 12h14" />
+              <path d="m12 5 7 7-7 7" />
+            </svg>
           </div>
         </div>
       </Link>

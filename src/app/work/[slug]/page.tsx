@@ -2,7 +2,6 @@ import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { PageLayout } from "@/components/v2/page-layout";
-import { Nav } from "@/components/v2/nav";
 import { Section } from "@/components/section";
 import { AnimateIn } from "@/components/animate-in";
 import { projects, getProjectBySlug } from "@/data/projects";
@@ -39,18 +38,23 @@ function ImagePlaceholder({ label }: { label: string }) {
 
 function CaseStudySidebar({ project }: { project: ReturnType<typeof getProjectBySlug> & {} }) {
   return (
-    <div className="px-5 pt-6 pb-8 desktop:px-8 desktop:pt-8">
-      <AnimateIn>
-        <Nav />
-      </AnimateIn>
-      <AnimateIn delay={0.1}>
-        <Link
-          href="/"
-          className="inline-block mt-8 py-2 text-sm text-neutral-500 hover:text-neutral-900 transition-colors duration-200"
-        >
-          &larr; Back to Work
-        </Link>
-      </AnimateIn>
+    <>
+      <div className="fixed top-0 left-0 right-0 z-10 py-2.5 px-2 max-w-[1024px] mx-auto bg-white">
+        <AnimateIn>
+          <Link
+            href="/"
+            className="inline-flex items-center h-11 w-fit rounded-full px-[7px] bg-white hover:bg-neutral-100 transition-colors duration-200"
+          >
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-[18px] h-[18px] shrink-0 text-[#000000B8]">
+              <path d="M19 12H5M5 12L12 19M5 12L12 5" />
+            </svg>
+            <span className="text-[15px] leading-[150%] text-[#000000B8] shrink-0 mx-1">
+              Home
+            </span>
+          </Link>
+        </AnimateIn>
+      </div>
+      <div className="px-5 pt-10 pb-8 desktop:px-8">
       <AnimateIn delay={0.2}>
         <h1 className="text-2xl font-semibold tracking-tight leading-tight mt-6 text-balance">
           {project.title}
@@ -77,7 +81,8 @@ function CaseStudySidebar({ project }: { project: ReturnType<typeof getProjectBy
           </div>
         </div>
       </AnimateIn>
-    </div>
+      </div>
+    </>
   );
 }
 
@@ -191,11 +196,12 @@ export default async function CaseStudyPage({ params }: PageProps) {
             <AnimateIn>
               <p className="text-sm text-neutral-400 mb-4">Next Project</p>
               {(() => {
-                const currentIndex = projects.findIndex(
+                const caseProjects = projects.filter((p) => p.type === "case");
+                const currentIndex = caseProjects.findIndex(
                   (p) => p.slug === project.slug
                 );
                 const nextProject =
-                  projects[(currentIndex + 1) % projects.length];
+                  caseProjects[(currentIndex + 1) % caseProjects.length];
                 return (
                   <Link
                     href={`/work/${nextProject.slug}`}

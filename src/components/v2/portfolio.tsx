@@ -244,7 +244,7 @@ export function Portfolio() {
 
   return (
     <LayoutGroup>
-      <div className="flex flex-col gap-2">
+      <div className="flex flex-col gap-6">
         {rows.map((row, rowIdx) => {
           if (row.type === "case") {
             const idx = itemIndex++;
@@ -266,15 +266,14 @@ export function Portfolio() {
           const leftIdx = itemIndex++;
           const rightIdx = itemIndex++;
 
-          const isFirstHalfRow = rowIdx === 1;
           return (
             <div
               key={rowIdx}
-              className={`flex flex-col tablet:flex-row ${isFirstHalfRow ? "gap-2" : "gap-5"}`}
+              className="flex flex-col tablet:flex-row gap-6"
             >
               <AnimateIn
                 delay={leftIdx * 0.04}
-                className="w-full tablet:flex-1 tablet:min-w-0 aspect-[4/3] tablet:aspect-square"
+                className="w-full tablet:flex-1 tablet:min-w-0 aspect-square"
               >
                 <HalfCell
                   cell={row.left}
@@ -284,7 +283,7 @@ export function Portfolio() {
               </AnimateIn>
               <AnimateIn
                 delay={rightIdx * 0.04}
-                className="w-full tablet:flex-1 tablet:min-w-0 aspect-[4/3] tablet:aspect-square"
+                className="w-full tablet:flex-1 tablet:min-w-0 aspect-square"
               >
                 <HalfCell
                   cell={row.right}

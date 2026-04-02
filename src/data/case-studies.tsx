@@ -17,58 +17,7 @@ export interface CaseStudyContent {
 }
 
 export const caseStudies: CaseStudyContent[] = [
-  {
-    slug: "design-system",
-    challenge: (
-      <>
-        <p>
-          The product had grown to support 100+ brands, each requiring its own
-          visual identity &mdash; colors, typography, spacing, iconography. Teams
-          were duplicating work, brand rollouts were slow, and visual consistency
-          was difficult to maintain at scale.
-        </p>
-        <p>
-          The challenge was to build a design system flexible enough to support
-          theming across all brands while keeping production fast and consistent.
-        </p>
-      </>
-    ),
-    process: (
-      <>
-        <p>
-          I audited existing brand implementations and identified the core
-          primitives that varied between brands vs. what stayed constant. This
-          led to a token-based architecture where brand identity lives in design
-          tokens while components remain universal.
-        </p>
-        <p>
-          The system was built with tokens for color, typography, spacing, and
-          iconography. I worked with engineering to ensure tokens mapped cleanly
-          to CSS custom properties, making theme switching seamless at the code
-          level.
-        </p>
-        <p>
-          I also standardized reusable templates and patterns so new screens stay
-          consistent as the product expands across brands.
-        </p>
-      </>
-    ),
-    solution: (
-      <>
-        <p>
-          The design system now powers 100+ brands from a single source of
-          truth. Brand rollouts that previously took weeks were reduced to days.
-          New team members can ship brand-consistent screens without deep context
-          on each brand&apos;s visual identity.
-        </p>
-        <p>
-          The token architecture also laid the groundwork for the LayerSweep
-          Figma plugin, automating what used to be manual theme remapping work.
-        </p>
-      </>
-    ),
-  },
-  {
+{
     slug: "layersweep",
     sections: [
       {

@@ -112,10 +112,10 @@ export function Info() {
 
       {/* CTA Buttons */}
       <AnimateIn delay={0.2}>
-        <div className="flex flex-col gap-2">
+        <div className="flex flex-col tablet:flex-row gap-2">
           <a
             href="mailto:rawchenko@gmail.com"
-            className="flex items-center justify-center gap-1.5 h-12 bg-[#343434] rounded-xl text-white text-sm font-semibold tracking-[-0.03em] shadow-[0_1px_2px_#0000001F,0_4px_4px_#0000001A,0_9px_5px_#0000000D,0_15px_6px_#00000005] active:scale-[0.98] transition-transform duration-150"
+            className="flex items-center justify-center gap-1.5 h-12 tablet:flex-1 bg-[#343434] rounded-xl text-white text-sm font-semibold tracking-[-0.03em] shadow-[0_1px_2px_#0000001F,0_4px_4px_#0000001A,0_9px_5px_#0000000D,0_15px_6px_#00000005] active:scale-[0.98] transition-transform duration-150"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -135,7 +135,7 @@ export function Info() {
           </a>
           <a
             href="#"
-            className="flex items-center justify-center gap-1.5 h-12 bg-white rounded-xl text-[#343434] text-sm font-semibold tracking-[-0.03em] shadow-[0_1px_2px_#0000001F,0_4px_4px_#0000001A,0_9px_5px_#0000000D,0_15px_6px_#00000005] active:scale-[0.98] transition-transform duration-150"
+            className="flex items-center justify-center gap-1.5 h-12 tablet:flex-1 bg-white rounded-xl text-[#343434] text-sm font-semibold tracking-[-0.03em] shadow-[0_1px_2px_#0000001F,0_4px_4px_#0000001A,0_9px_5px_#0000000D,0_15px_6px_#00000005] active:scale-[0.98] transition-transform duration-150"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"

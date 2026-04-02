@@ -12,18 +12,7 @@ export interface Project {
 }
 
 export const projects: Project[] = [
-  {
-    slug: "design-system",
-    title: "Multi-Brand Design System",
-    description:
-      "Developed and maintained a design system with tokens, typography, spacing, and iconography powering 100+ brands.",
-    tags: ["Design Systems", "Tokens", "Theming"],
-    year: "2024",
-    role: "Senior Product Designer",
-    thumbnail: asset("/images/projects/project-1.png"),
-    type: "case",
-  },
-  {
+{
     slug: "soulmate",
     title: "Soulmate — Relationship App",
     description:
