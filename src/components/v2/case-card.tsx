@@ -1,11 +1,11 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
-import { useRef, useState, useEffect } from "react";
+import { useRef, useState, useEffect, useCallback } from "react";
 import { Dithering, GrainGradient, MeshGradient } from "@paper-design/shaders-react";
 import { getProjectBySlug } from "@/data/projects";
 import { CursorFollower } from "@/components/cursor-follower";
+import { CarouselShaderSync, type CarouselSlide } from "./carousel-shader-sync";
 
 interface CaseImage {
   src: string;
@@ -20,6 +20,13 @@ export interface ShaderConfig {
   props: Record<string, unknown>;
 }
 
+export interface CarouselConfig {
+  slides: CarouselSlide[];
+  intervalMs?: number;
+  transitionMs?: number;
+  imageStyle: React.CSSProperties;
+}
+
 interface CaseCardProps {
   projectSlug: string;
   label: string;
@@ -28,6 +35,8 @@ interface CaseCardProps {
   background?: string;
   shaderConfig?: ShaderConfig;
   images?: CaseImage[];
+  carousel?: CarouselConfig;
+  onCaseClick?: (slug: string) => void;
 }
 
 function ShaderRenderer({ config, inView }: { config: ShaderConfig; inView: boolean }) {
@@ -44,10 +53,15 @@ function ShaderRenderer({ config, inView }: { config: ShaderConfig; inView: bool
   }
 }
 
-export function CaseCard({ projectSlug, label, description, dark, background, shaderConfig, images }: CaseCardProps) {
+export function CaseCard({ projectSlug, label, description, dark, background, shaderConfig, images, carousel, onCaseClick }: CaseCardProps) {
   const project = getProjectBySlug(projectSlug);
   const cardRef = useRef<HTMLDivElement>(null);
   const [inView, setInView] = useState(false);
+  const [dynamicColors, setDynamicColors] = useState<[string, string, string, string] | null>(null);
+
+  const handleColorsChange = useCallback((colors: [string, string, string, string]) => {
+    setDynamicColors(colors);
+  }, []);
 
   useEffect(() => {
     const el = cardRef.current;
@@ -61,23 +75,44 @@ export function CaseCard({ projectSlug, label, description, dark, background, sh
   }, []);
   if (!project) return null;
 
+  const effectiveShaderConfig = shaderConfig
+    ? dynamicColors
+      ? { ...shaderConfig, props: { ...shaderConfig.props, colors: dynamicColors } }
+      : shaderConfig
+    : undefined;
+
   const textColor = dark ? "text-white" : "text-[#343434]";
   const mutedColor = dark ? "text-white/50" : "text-[#343434]/50";
   const strokeColor = dark ? "#FFFFFF" : "#343434";
 
   return (
     <CursorFollower>
-      <Link
+      <a
         href={`/work/${project.slug}`}
         className="group block active:scale-[0.99] transition-transform duration-200"
+        onClick={(e) => {
+          if (onCaseClick) {
+            e.preventDefault();
+            onCaseClick(projectSlug);
+          }
+        }}
       >
         <div
           ref={cardRef}
           className="relative w-full aspect-[960/600] overflow-hidden"
           style={{ background: background || "var(--color-card-dark)" }}
         >
-          {shaderConfig && <ShaderRenderer config={shaderConfig} inView={inView} />}
-          {images ? (
+          {effectiveShaderConfig && <ShaderRenderer config={effectiveShaderConfig} inView={inView} />}
+          {carousel ? (
+            <CarouselShaderSync
+              slides={carousel.slides}
+              intervalMs={carousel.intervalMs}
+              transitionMs={carousel.transitionMs}
+              imageStyle={carousel.imageStyle}
+              inView={inView}
+              onColorsChange={handleColorsChange}
+            />
+          ) : images ? (
             images.map((img, i) => (
               <Image
                 key={i}
@@ -127,7 +162,7 @@ export function CaseCard({ projectSlug, label, description, dark, background, sh
             </svg>
           </div>
         </div>
-      </Link>
+      </a>
     </CursorFollower>
   );
 }

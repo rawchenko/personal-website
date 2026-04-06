@@ -6,6 +6,7 @@ import { Section } from "@/components/section";
 import { AnimateIn } from "@/components/animate-in";
 import { projects, getProjectBySlug } from "@/data/projects";
 import { getCaseStudyContent } from "@/data/case-studies";
+import { BrainrocketHero } from "@/components/v2/brainrocket-hero";
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -33,6 +34,19 @@ function ImagePlaceholder({ label }: { label: string }) {
     <div className="aspect-[16/9] bg-neutral-100 rounded-lg flex items-center justify-center">
       <span className="text-neutral-400 text-sm">{label}</span>
     </div>
+  );
+}
+
+function VideoPlayer({ src }: { src: string }) {
+  return (
+    <video
+      src={src}
+      autoPlay
+      muted
+      loop
+      playsInline
+      className="w-full rounded-lg"
+    />
   );
 }
 
@@ -102,10 +116,14 @@ export default async function CaseStudyPage({ params }: PageProps) {
       info={<CaseStudySidebar project={project} />}
       portfolio={
         <div>
-          {/* Hero image placeholder */}
+          {/* Hero image */}
           <div className="pt-4">
             <AnimateIn>
-              <ImagePlaceholder label={`Hero Image — ${project.title}`} />
+              {slug === "brainrocket-showcase" ? (
+                <BrainrocketHero />
+              ) : (
+                <ImagePlaceholder label={`Hero Image — ${project.title}`} />
+              )}
             </AnimateIn>
           </div>
 
@@ -126,13 +144,19 @@ export default async function CaseStudyPage({ params }: PageProps) {
                     </AnimateIn>
                   </Section>
 
-                  {section.imagePlaceholder && (
+                  {section.videoUrl ? (
+                    <div>
+                      <AnimateIn>
+                        <VideoPlayer src={section.videoUrl} />
+                      </AnimateIn>
+                    </div>
+                  ) : section.imagePlaceholder ? (
                     <div>
                       <AnimateIn>
                         <ImagePlaceholder label={section.imagePlaceholder} />
                       </AnimateIn>
                     </div>
-                  )}
+                  ) : null}
                 </div>
               ))}
             </>

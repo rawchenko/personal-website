@@ -1,11 +1,12 @@
 "use client";
 
 import { useState } from "react";
-import { AnimatePresence, LayoutGroup } from "framer-motion";
+import { AnimatePresence } from "framer-motion";
 import { AnimateIn } from "@/components/animate-in";
 import { Lightbox } from "@/components/lightbox";
 import { asset } from "@/lib/utils";
-import { CaseCard, type ShaderConfig } from "./case-card";
+import { CaseCard, type ShaderConfig, type CarouselConfig } from "./case-card";
+import { CaseStudyOverlay } from "./case-study-overlay";
 import { ImageCard } from "./image-card";
 import { ExperienceCard } from "./experience-card";
 import { ApplicationsCard } from "./applications-card";
@@ -27,6 +28,7 @@ interface CaseRow {
   background?: string;
   shaderConfig?: ShaderConfig;
   images?: CaseImage[];
+  carousel?: CarouselConfig;
 }
 
 interface HalfRow {
@@ -163,21 +165,53 @@ const rows: PortfolioRow[] = [
         style: shaderStyle,
       },
     },
-    images: [
-      {
-        src: asset("/images/projects/brainrocket-showcase.png"),
-        alt: "Brainrocket sports betting interface",
-        width: 3409,
-        height: 2459,
-        style: {
-          left: "16.8%",
-          top: "11.5%",
-          width: "66.4%",
-          height: "auto",
-          objectPosition: "33.333%",
-        },
+    carousel: {
+      intervalMs: 1500,
+      transitionMs: 500,
+      imageStyle: {
+        left: "16.8%",
+        top: "11.5%",
+        width: "66.4%",
+        height: "auto",
       },
-    ],
+      slides: [
+        {
+          // Betoro — dark with red + green accents
+          image: { src: asset("/images/projects/brainrocket-showcase-betoro.png"), alt: "Betoro sports betting", width: 3409, height: 2459 },
+          shaderColors: ["#000000", "#000000", "#FF0052FC", "#009B56"],
+        },
+        {
+          // Swiper — deep navy blue with electric blue glow
+          image: { src: asset("/images/projects/brainrocket-showcase-swiper.png"), alt: "Swiper casino", width: 3409, height: 2459 },
+          shaderColors: ["#030818", "#0B1A3D", "#1447E6", "#00C2FF"],
+        },
+        {
+          // Kingmaker — rich purple with gold accents
+          image: { src: asset("/images/projects/brainrocket-showcase-kingmaker.png"), alt: "Kingmaker", width: 3409, height: 2459 },
+          shaderColors: ["#0E0320", "#2D0A5C", "#8B5CF6", "#D4A017"],
+        },
+        {
+          // Slotuna — dark teal with warm amber
+          image: { src: asset("/images/projects/brainrocket-showcase-slotuna.png"), alt: "Slotuna", width: 3409, height: 2459 },
+          shaderColors: ["#051A1E", "#0A3040", "#0E7490", "#D4953A"],
+        },
+        {
+          // Spinrollz — soft lavender blue with warm orange
+          image: { src: asset("/images/projects/brainrocket-showcase-spinrollz.png"), alt: "Spinrollz", width: 3409, height: 2459 },
+          shaderColors: ["#1A1A3E", "#2E2B6E", "#7B8CDE", "#F97316"],
+        },
+        {
+          // Spinit — black with neon green/lime
+          image: { src: asset("/images/projects/brainrocket-showcase-spinit.png"), alt: "Spinit", width: 3409, height: 2459 },
+          shaderColors: ["#000000", "#0A1A0A", "#39FF14", "#00CC44"],
+        },
+        {
+          // Wild Robin — dark brown with warm gold-green
+          image: { src: asset("/images/projects/brainrocket-showcase-wildrobin.png"), alt: "Wild Robin", width: 3409, height: 2459 },
+          shaderColors: ["#1A0E05", "#3D2510", "#8B6914", "#2D5A1E"],
+        },
+      ],
+    },
   },
   {
     type: "half",
@@ -214,7 +248,7 @@ function HalfCell({
   lightboxSlug,
 }: {
   cell: HalfRow["left"];
-  onImageClick: (src: string, alt: string, slug: string) => void;
+  onImageClick: (src: string, alt: string, slug: string, rect: DOMRect) => void;
   lightboxSlug: string | null;
 }) {
   switch (cell.kind) {
@@ -238,12 +272,15 @@ export function Portfolio() {
     src: string;
     alt: string;
     slug: string;
+    rect: DOMRect;
   } | null>(null);
+
+  const [activeCaseSlug, setActiveCaseSlug] = useState<string | null>(null);
 
   let itemIndex = 0;
 
   return (
-    <LayoutGroup>
+    <>
       <div className="flex flex-col gap-6">
         {rows.map((row, rowIdx) => {
           if (row.type === "case") {
@@ -258,6 +295,8 @@ export function Portfolio() {
                   background={row.background}
                   shaderConfig={row.shaderConfig}
                   images={row.images}
+                  carousel={row.carousel}
+                  onCaseClick={(slug) => setActiveCaseSlug(slug)}
                 />
               </AnimateIn>
             );
@@ -277,7 +316,7 @@ export function Portfolio() {
               >
                 <HalfCell
                   cell={row.left}
-                  onImageClick={(src, alt, slug) => setLightbox({ src, alt, slug })}
+                  onImageClick={(src, alt, slug, rect) => setLightbox({ src, alt, slug, rect })}
                   lightboxSlug={lightbox?.slug ?? null}
                 />
               </AnimateIn>
@@ -287,7 +326,7 @@ export function Portfolio() {
               >
                 <HalfCell
                   cell={row.right}
-                  onImageClick={(src, alt, slug) => setLightbox({ src, alt, slug })}
+                  onImageClick={(src, alt, slug, rect) => setLightbox({ src, alt, slug, rect })}
                   lightboxSlug={lightbox?.slug ?? null}
                 />
               </AnimateIn>
@@ -301,11 +340,22 @@ export function Portfolio() {
             key="v2-lightbox"
             src={lightbox.src}
             alt={lightbox.alt}
-            layoutId={`v2-project-image-${lightbox.slug}`}
+            slug={lightbox.slug}
+            sourceRect={lightbox.rect}
             onClose={() => setLightbox(null)}
           />
         )}
       </AnimatePresence>
-    </LayoutGroup>
+      <AnimatePresence>
+        {activeCaseSlug && (
+          <CaseStudyOverlay
+            key="case-study-overlay"
+            slug={activeCaseSlug}
+            onClose={() => setActiveCaseSlug(null)}
+            onNavigate={(slug) => setActiveCaseSlug(slug)}
+          />
+        )}
+      </AnimatePresence>
+    </>
   );
 }

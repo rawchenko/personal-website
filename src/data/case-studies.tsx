@@ -4,6 +4,7 @@ export interface CaseStudySection {
   title: string;
   content: ReactNode;
   imagePlaceholder?: string;
+  videoUrl?: string;
 }
 
 export interface CaseStudyContent {
@@ -462,7 +463,7 @@ export const caseStudies: CaseStudyContent[] = [
         content: (
           <>
             <p>
-              During my time at Brainrocket (2022&ndash;2024), I designed 9
+              During my time at Brainrocket (2022&ndash;2024), I designed 7
               iGaming brands &mdash; online casinos and sportsbooks, each with
               its own identity, audience, and visual direction &mdash; all
               running on a shared platform and design system.
@@ -498,6 +499,8 @@ export const caseStudies: CaseStudyContent[] = [
         ),
         imagePlaceholder:
           "Betoro — brand identity, web and mobile product screens",
+        videoUrl:
+          "https://pub-3dcbbf8f8f7140cb987df422a0768332.r2.dev/brainrocket-showcase/betoro.mp4",
       },
       {
         title: "Swiper.dk / Swiper.se",
@@ -512,6 +515,8 @@ export const caseStudies: CaseStudyContent[] = [
           </p>
         ),
         imagePlaceholder: "Swiper — shorts feed and key screens",
+        videoUrl:
+          "https://pub-3dcbbf8f8f7140cb987df422a0768332.r2.dev/brainrocket-showcase/swiper.mp4",
       },
       {
         title: "Spinnit.com",
@@ -527,20 +532,8 @@ export const caseStudies: CaseStudyContent[] = [
         ),
         imagePlaceholder:
           "Spinnit — homepage and key product screens showing the brand's distinct visual style",
-      },
-      {
-        title: "Spinfest.com",
-        content: (
-          <p>
-            Spinfest was one of the more playful brands on the platform &mdash;
-            a casino with a fruit-themed waterpark aesthetic. The visual
-            direction was bright, saturated, and unapologetically fun, targeting
-            a casual audience that responds to lighthearted, summer-vibes
-            branding.
-          </p>
-        ),
-        imagePlaceholder:
-          "Spinfest — key screens showing the vibrant fruit/waterpark visual direction",
+        videoUrl:
+          "https://pub-3dcbbf8f8f7140cb987df422a0768332.r2.dev/brainrocket-showcase/spinit.mp4",
       },
       {
         title: "WildRobin.com",
@@ -556,6 +549,8 @@ export const caseStudies: CaseStudyContent[] = [
         ),
         imagePlaceholder:
           "WildRobin — homepage with the Robin Hood mascot, warm color palette, and gamification features",
+        videoUrl:
+          "https://pub-3dcbbf8f8f7140cb987df422a0768332.r2.dev/brainrocket-showcase/wildrobin.mp4",
       },
       {
         title: "Slotuna.com",
@@ -571,6 +566,8 @@ export const caseStudies: CaseStudyContent[] = [
         ),
         imagePlaceholder:
           "Slotuna — homepage with fantasy illustrations, teal color palette, and gamification sidebar",
+        videoUrl:
+          "https://pub-3dcbbf8f8f7140cb987df422a0768332.r2.dev/brainrocket-showcase/slotuna.mp4",
       },
       {
         title: "Kingmaker.com",
@@ -585,19 +582,8 @@ export const caseStudies: CaseStudyContent[] = [
         ),
         imagePlaceholder:
           "Kingmaker — homepage with purple-gold palette, 3D crown visuals, and gamification features",
-      },
-      {
-        title: "Jackpot Frenzy",
-        content: (
-          <p>
-            Jackpot Frenzy was one of the wildest brands on the platform
-            visually &mdash; loud, bright, and intentionally over-the-top. The
-            design leaned into maximum energy: saturated colors, bold
-            typography, and a chaotic-fun aesthetic that matched the brand name.
-          </p>
-        ),
-        imagePlaceholder:
-          "Jackpot Frenzy — key screens showing the bold, high-energy visual style",
+        videoUrl:
+          "https://pub-3dcbbf8f8f7140cb987df422a0768332.r2.dev/brainrocket-showcase/kingmaker.mp4",
       },
       {
         title: "Spinrollz",
@@ -612,13 +598,15 @@ export const caseStudies: CaseStudyContent[] = [
         ),
         imagePlaceholder:
           "Spinrollz — homepage with pastel lavender-blue palette and cartoon category illustrations",
+        videoUrl:
+          "https://pub-3dcbbf8f8f7140cb987df422a0768332.r2.dev/brainrocket-showcase/spinrollz.mp4",
       },
       {
         title: "What Tied It All Together",
         content: (
           <>
             <p>
-              Working across 9 brands on a shared platform taught me how to
+              Working across 7 brands on a shared platform taught me how to
               balance consistency with differentiation. Every brand ran on the
               same tech stack and design system, but each needed its own
               identity, tone, and UX priorities.

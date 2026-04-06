@@ -115,7 +115,7 @@ export const projects: Project[] = [
     slug: "brainrocket-showcase",
     title: "Brainrocket — iGaming Brand Showcase",
     description:
-      "A selection of 9 iGaming brands I designed — from product design on individual brands to leading a brand from scratch.",
+      "A selection of 7 iGaming brands I designed — from product design on individual brands to leading a brand from scratch.",
     tags: ["Product Design", "iGaming", "Branding"],
     year: "2022–2024",
     role: "Product → Senior → Lead Designer",
