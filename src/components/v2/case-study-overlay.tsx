@@ -76,9 +76,7 @@ export function CaseStudyOverlay({
 
   // Create a history entry when the overlay opens so Back closes it.
   useEffect(() => {
-    const basePath =
-      process.env.NODE_ENV === "production" ? "/personal-website" : "";
-    const overlayUrl = `${basePath}/work/${initialSlug.current}`;
+    const overlayUrl = `/work/${initialSlug.current}`;
 
     window.history.pushState({ caseStudyOverlay: true }, "", overlayUrl);
     hasPushedHistoryEntry.current = true;
@@ -92,9 +90,7 @@ export function CaseStudyOverlay({
   useEffect(() => {
     if (!hasPushedHistoryEntry.current) return;
 
-    const basePath =
-      process.env.NODE_ENV === "production" ? "/personal-website" : "";
-    const overlayUrl = `${basePath}/work/${slug}`;
+    const overlayUrl = `/work/${slug}`;
     window.history.replaceState({ caseStudyOverlay: true }, "", overlayUrl);
   }, [slug]);
 
