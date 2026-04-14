@@ -27,9 +27,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={inter.variable}>
       <body>
-        <div className="max-w-[1440px] mx-auto">
-          <main>{children}</main>
-        </div>
+        <main>{children}</main>
         {process.env.NODE_ENV === "development" && <Agentation />}
       </body>
     </html>

@@ -472,7 +472,7 @@ export function CaseStudyBody({
   return (
     <div className="min-h-screen bg-[#F5F5F5]">
       <div className="mx-auto flex w-full flex-col items-start tablet:max-w-[992px]">
-        <div className="w-full px-2 py-2 tablet:px-0 tablet:py-6">
+        <div className="w-full px-4 py-4 tablet:py-6">
           <BackButton variant={variant} onClose={onClose} />
         </div>
 
@@ -505,7 +505,7 @@ export function CaseStudyBody({
           ))}
         </main>
 
-        <footer className="flex w-full flex-col gap-2 px-4 py-4 text-sm leading-[22px] text-[rgba(52,52,52,0.7)] tablet:flex-row tablet:px-0">
+        <footer className="flex w-full flex-col gap-2 px-4 py-4 text-sm leading-[22px] text-[rgba(52,52,52,0.7)] tablet:flex-row">
           <p className="tablet:flex-1">© 2026 - Eugene Kravchenko</p>
           <p className="tablet:flex-1 tablet:text-right">
             vibecoded and vibedesigned
