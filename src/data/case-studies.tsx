@@ -1,269 +1,413 @@
 import type { ReactNode } from "react";
 
+export interface CaseStudyMediaFrame {
+  width: number;
+  height: number;
+  left: number;
+  top: number;
+}
+
+export interface CaseStudyBlock {
+  subHeader: string;
+  content: ReactNode;
+  videoUrl?: string;
+  imagePlaceholder?: string;
+  imageUrl?: string;
+  imageAlt?: string;
+  mediaLayout?: "full" | "canvas";
+  desktopFrame?: CaseStudyMediaFrame;
+  mobileFrame?: CaseStudyMediaFrame;
+}
+
 export interface CaseStudySection {
   title: string;
   content: ReactNode;
   imagePlaceholder?: string;
   videoUrl?: string;
+  imageUrl?: string;
+  imageAlt?: string;
+  mediaLayout?: "full" | "canvas";
+  desktopFrame?: CaseStudyMediaFrame;
+  mobileFrame?: CaseStudyMediaFrame;
+  /** Layout variant for this section */
+  layout?: "default" | "two-column" | "blocks-with-media" | "narrow";
+  /** Right column content for two-column layout */
+  rightColumn?: ReactNode;
+  /** Sub-blocks for blocks-with-media layout */
+  blocks?: CaseStudyBlock[];
+  /** Gap between text group and media in blocks-with-media (default 12px) */
+  blockMediaGap?: "normal" | "large";
 }
 
 export interface CaseStudyContent {
   slug: string;
+  /** Optional CTA button shown in the header */
+  ctaUrl?: string;
+  ctaLabel?: string;
   /** Legacy format — used by design-system, layersweep */
   challenge?: ReactNode;
   process?: ReactNode;
   solution?: ReactNode;
-  /** Flexible sections format — used by casino-brand (Swiper) */
+  /** Flexible sections format */
   sections?: CaseStudySection[];
 }
+
+const layersweepMedia = {
+  prototype:
+    "https://app.paper.design/file-assets/01KNH70K2R8QSW8HD5PA4XGN14/01KP48E5NPHJ7JQ06501R1BBX8.png",
+  polish:
+    "https://app.paper.design/file-assets/01KNH70K2R8QSW8HD5PA4XGN14/01KP48E5NJ2TPJQZFZTDH3HRNZ.png",
+  scan:
+    "https://app.paper.design/file-assets/01KNH70K2R8QSW8HD5PA4XGN14/01KP48HT815DFHX9PJ8SV964K8.png",
+  swap:
+    "https://app.paper.design/file-assets/01KNH70K2R8QSW8HD5PA4XGN14/01KP48J2Y17DK33AAKKTZ4F01J.png",
+} as const;
 
 export const caseStudies: CaseStudyContent[] = [
 {
     slug: "layersweep",
+    ctaUrl: "https://www.figma.com/community/plugin/1505653916498498498",
+    ctaLabel: "Open in Figma Community",
     sections: [
       {
-        title: "Overview",
+        title: "",
+        layout: "two-column",
         content: (
           <>
+            <div className="flex flex-col gap-3">
+              <p className="font-semibold">The Problem</p>
+              <p>
+                Our platform was migrating to a completely new token structure.
+                Every text, color, and effect style in the master template had
+                to be swapped for its new counterpart &mdash; thousands of
+                layers, no naming overlap between old and new tokens. Manual
+                replacement: 20&ndash;30 hours of tedious, error-prone work.
+              </p>
+            </div>
+            <div className="flex flex-col gap-3">
+              <p className="font-semibold">My Role</p>
+              <p>Design Engineer</p>
+            </div>
+            <div className="flex flex-col gap-3">
+              <p className="font-semibold">Tools</p>
+              <p>Figma, Claude Code, Codex</p>
+            </div>
+          </>
+        ),
+        rightColumn: (
+          <div className="flex flex-col gap-3">
+            <p className="font-semibold">Overview</p>
             <p>
               I initiated and built a Figma plugin that scans a file for bound
               styles, lets users configure old-to-new mapping, and applies
-              replacements in bulk. What started as an internal tool to solve a
-              specific migration task became a published plugin with 200+ users
-              on Figma Community.
+              replacements in bulk. I published it on Figma Community.
             </p>
-            <p>
-              <strong>Role:</strong> Design Engineer &middot;{" "}
-              <strong>Tools:</strong> Figma Plugin API, TypeScript, Claude Code,
-              Codex &middot; <strong>Timeline:</strong> ~2 weeks
-            </p>
-          </>
-        ),
-        imagePlaceholder: "Plugin overview in Figma",
-      },
-      {
-        title: "The Problem",
-        content: (
-          <p>
-            Our platform was migrating to a completely new token structure.
-            Every text, color, and effect style in the master template had to be
-            swapped for its new counterpart &mdash; thousands of layers, no
-            naming overlap between old and new tokens. Manual replacement would
-            take 20&ndash;30 hours of tedious, error-prone work.
-          </p>
+          </div>
         ),
       },
       {
         title: "Personal Goals",
         content: (
-          <>
-            <p>
-              Ship a tool that solves a real team problem &mdash; eliminate
-              manual style replacement and make token migrations painless for
-              any designer on the team.
-            </p>
-            <p>
-              Design and build end-to-end &mdash; own the full cycle from UX
-              decisions to production code, proving the Design Engineer skillset
-              in practice.
-            </p>
-            <p>
-              Stress-test AI-assisted development &mdash; use Claude Code and
-              Codex as primary coding tools and form an honest picture of where
-              AI agents accelerate work and where they fall short.
-            </p>
-          </>
+          <div className="flex flex-col gap-3">
+            <div className="flex flex-col gap-3">
+              <div className="flex items-start gap-2">
+                <span className="w-7 h-6 rounded-full border border-[#DEDEDE] flex items-center justify-center text-base font-semibold shrink-0">
+                  1
+                </span>
+                <span className="font-semibold leading-[24px]">
+                  Solve a real team problem
+                </span>
+              </div>
+              <p>
+                Eliminate manual style replacement and make token migrations
+                painless for any designer on the team.
+              </p>
+            </div>
+            <div className="flex flex-col gap-3">
+              <div className="flex items-start gap-2">
+                <span className="w-7 h-6 rounded-full border border-[#DEDEDE] flex items-center justify-center text-base font-semibold shrink-0">
+                  2
+                </span>
+                <span className="font-semibold leading-[24px]">
+                  Design and build end-to-end
+                </span>
+              </div>
+              <p>
+                Own the full cycle from UX decisions to production code, proving
+                the Design Engineer skillset in practice.
+              </p>
+            </div>
+            <div className="flex flex-col gap-3">
+              <div className="flex items-start gap-2">
+                <span className="w-7 h-6 rounded-full border border-[#DEDEDE] flex items-center justify-center text-base font-semibold shrink-0">
+                  3
+                </span>
+                <span className="font-semibold leading-[24px]">
+                  Stress-test AI-assisted development
+                </span>
+              </div>
+              <p>
+                Use Claude Code and Codex as primary coding tools and form an
+                honest picture of where AI agents accelerate work and where they
+                fall short.
+              </p>
+            </div>
+          </div>
         ),
       },
       {
         title: "Approach: From Hypothesis to Tool",
-        content: (
-          <>
-            <p>
-              <strong>Validating the Hypothesis (Days 1&ndash;2):</strong>{" "}
-              Before committing to full development, I needed to confirm that
-              the Figma API actually supported what I had in mind: recursively
-              traversing the layer tree, reading bound styles, and
-              programmatically replacing them. I built a minimal
-              prototype &mdash; no UI, pure console logic &mdash; and confirmed
-              it was feasible. The key question: can you reliably map old styles
-              to new ones when their names don&apos;t match and their structures
-              differ? The answer: yes, but it requires a well-designed interface
-              for configuring the mapping.
-            </p>
-            <p>
-              <strong>Working Version (Week 1):</strong> Over the first week, I
-              built the plugin to a state where it solved the core problem: file
-              scanning, replacement configuration, and batch-applying new
-              styles. The token migration task was completed.
-            </p>
-            <p>
-              <strong>UX/UI Polish (Week 2):</strong> With the instrumental task
-              done, I focused on making the plugin usable not just for myself,
-              but for the team &mdash; and potentially for any designer facing a
-              similar challenge. That meant: thoughtful onboarding, clear
-              states, and visual consistency with Figma&apos;s own interface.
-            </p>
-          </>
-        ),
-        imagePlaceholder:
-          "Early plugin version / first prototype → final plugin UI",
+        layout: "blocks-with-media",
+        blockMediaGap: "large",
+        content: null,
+        blocks: [
+          {
+            subHeader: "Validating the Hypothesis (Days 1\u20132)",
+            content: (
+              <>
+                <p>
+                  Before committing to full development, I needed to confirm
+                  that the Figma API actually supported what I had in mind:
+                  recursively traversing the layer tree, reading bound styles,
+                  and programmatically replacing them. I built a minimal
+                  prototype &mdash; no UI, pure console logic &mdash; and
+                  confirmed it was feasible.
+                </p>
+                <p>
+                  The key question at this stage: can you reliably map old
+                  styles to new ones when their names don&apos;t match and their
+                  structures differ? The answer: yes, but it requires a
+                  well-designed interface for configuring the mapping.
+                </p>
+              </>
+            ),
+            imageUrl: layersweepMedia.prototype,
+            imageAlt: "Early LayerSweep prototype screenshot",
+            mediaLayout: "canvas",
+            desktopFrame: { width: 416, height: 423, left: 272, top: 88 },
+            mobileFrame: { width: 180, height: 183, left: 89, top: 20 },
+          },
+          {
+            subHeader: "Working Version (Week 1)",
+            content: (
+              <p>
+                Over the first week, I built the plugin to a state where it
+                solved the core problem: file scanning, replacement
+                configuration, and batch-applying new styles. The architecture
+                splits into two layers &mdash; the sandbox thread handles
+                recursive tree traversal and style resolution, while the UI
+                thread manages state and user interaction through Figma&apos;s
+                messaging API.
+              </p>
+            ),
+          },
+          {
+            subHeader: "UX/UI Polish (Week 2)",
+            content: (
+              <p>
+                With the instrumental task done, I focused on making the plugin
+                usable not just for myself, but for the team &mdash; and
+                potentially for any designer facing a similar challenge. That
+                meant: thoughtful onboarding, clear states, and visual
+                consistency with Figma&apos;s own interface.
+              </p>
+            ),
+            imageUrl: layersweepMedia.polish,
+            imageAlt: "LayerSweep polished interface screenshot",
+            mediaLayout: "canvas",
+            desktopFrame: { width: 319, height: 404, left: 320, top: 98 },
+            mobileFrame: { width: 149, height: 188, left: 104, top: 18 },
+          },
+        ],
       },
       {
-        title: "Scan Result: Transparency Before Action",
-        content: (
-          <>
-            <p>
-              Users can&apos;t trust a plugin with bulk style replacement if
-              they don&apos;t understand the scope of changes. Before any
-              replacement happens, the plugin shows a full scan of the
-              file &mdash; all detected styles, layer counts for each, grouped
-              by category. This isn&apos;t just a list: it&apos;s a navigable
-              report that gives designers a sense of control over the process.
-            </p>
-            <p>
-              Bulk operations create anxiety. Showing users &ldquo;what will be
-              affected&rdquo; before anything changes is a fundamental principle
-              for tools with potentially irreversible actions.
-            </p>
-          </>
-        ),
-        imagePlaceholder: "Scan results screen",
+        title: "How it works",
+        layout: "blocks-with-media",
+        content: null,
+        blocks: [
+          {
+            subHeader: "Scoped Scan",
+            content: (
+              <p>
+                The plugin doesn&apos;t scan everything blindly. Users choose
+                which pages and layer types to include &mdash; instances,
+                components, frames &mdash; before the scan begins. This keeps
+                results relevant, especially in large files with dozens of
+                pages.
+              </p>
+            ),
+            videoUrl:
+              "https://pub-3dcbbf8f8f7140cb987df422a0768332.r2.dev/LayerSweep/01%20scoped-scan.mp4",
+          },
+          {
+            subHeader: "Scan Results and Filtering",
+            content: (
+              <p>
+                Scan results are grouped by source: detached styles, remote
+                library, and local styles. Each style shows how many layers use
+                it. Users can expand any group down to individual tokens, search
+                by name, and filter by style type or layer type to narrow the
+                view.
+              </p>
+            ),
+            videoUrl:
+              "https://pub-3dcbbf8f8f7140cb987df422a0768332.r2.dev/LayerSweep/02%20scan-results-and-filtering.mp4",
+          },
+          {
+            subHeader: "Selecting Styles for Swap",
+            content: (
+              <p>
+                Users select which styles to replace directly from the scan
+                results via checkboxes &mdash; at the group level or
+                individually. Selected styles carry over to the Swap tab with
+                one click.
+              </p>
+            ),
+            videoUrl:
+              "https://pub-3dcbbf8f8f7140cb987df422a0768332.r2.dev/LayerSweep/03%20selecting-styles-for-swap.mp4",
+          },
+          {
+            subHeader: "Choosing Target Styles",
+            content: (
+              <>
+                <p>
+                  In the Swap tab, each selected style gets a mapping:
+                  old &rarr; new. Users choose the target style from a dropdown
+                  of available styles in the file. The same filtering system
+                  works here &mdash; you can narrow the options by layer type or
+                  location.
+                </p>
+                <p>
+                  I rejected automatic name-similarity matching &mdash; token
+                  names across versions rarely overlap, so it would create false
+                  confidence.
+                </p>
+              </>
+            ),
+            videoUrl:
+              "https://pub-3dcbbf8f8f7140cb987df422a0768332.r2.dev/LayerSweep/04%20choosing-target-styles.mp4",
+          },
+          {
+            subHeader: "Review Result",
+            content: (
+              <p>
+                Before applying, the plugin shows a summary: how many layers
+                will be affected, which pages, and a warning if changes will
+                propagate through component instances. After the swap, users can
+                review the result screen to see what was updated, undo changes,
+                or drill down into affected layers grouped by context.
+              </p>
+            ),
+            videoUrl:
+              "https://pub-3dcbbf8f8f7140cb987df422a0768332.r2.dev/LayerSweep/05%20review-results.mp4",
+          },
+          {
+            subHeader: "Dark and Light Theme",
+            content: (
+              <p>
+                The plugin adapts to the user&apos;s preferred appearance with
+                light, dark, and auto theme modes &mdash; consistent with
+                Figma&apos;s own interface.
+              </p>
+            ),
+            videoUrl:
+              "https://pub-3dcbbf8f8f7140cb987df422a0768332.r2.dev/LayerSweep/06%20dark-and-light-theme.mp4",
+          },
+        ],
       },
       {
-        title: "Swap: Group-Level Mapping",
-        content: (
-          <>
-            <p>
-              A file can contain dozens of styles. Configuring replacement for
-              each individually is almost as slow as replacing them manually.
-              Mapping works at the group level: if old styles are grouped
-              under <code>Paragraph/</code> and new ones
-              under <code>body/</code>, the plugin suggests matching them as a
-              batch. Users can refine individual pairs, but the starting point
-              is already there.
-            </p>
-            <p>
-              Alternative I rejected: automatic mapping by name similarity. In
-              practice, old and new token names often share nothing in
-              common &mdash; an algorithm would create a false sense of
-              confidence.
-            </p>
-          </>
-        ),
-        imagePlaceholder: "Swap configuration screen",
-      },
-      {
-        title: "Onboarding and Product Tour",
-        content: (
-          <p>
-            Early users from the team would open the plugin and not know where
-            to start. Scanning, mapping, replacing &mdash; three steps that
-            were obvious to the author but not to a new user. The solution: two
-            layers of guidance. First &mdash; an onboarding screen on first
-            launch with a brief explanation of the workflow.
-            Second &mdash; an interactive product tour that highlights interface
-            elements in context. Users can skip both, but the first launch no
-            longer causes confusion.
-          </p>
-        ),
-        imagePlaceholder: "Onboarding and product tour screens",
-      },
-      {
-        title: "Swap Result: The Report as a Safety Net",
-        content: (
-          <p>
-            After bulk replacement, users want to know: did everything go
-            correctly? The result screen shows the number of affected layers,
-            successful replacements, and errors (if a style wasn&apos;t found
-            or a layer was protected). This isn&apos;t just
-            a &ldquo;Done&rdquo; message &mdash; it&apos;s a report you can
-            review and, if needed, partially roll back.
-          </p>
-        ),
-        imagePlaceholder: "Swap results screen",
-      },
-      {
-        title: "Building with AI Agents",
+        title: "Building with AI Agents: What Worked and What Didn\u2019t",
+        layout: "narrow",
         content: (
           <>
             <p>
               All of LayerSweep&apos;s code was written using Claude Code and
               OpenAI Codex. This was a deliberate experiment &mdash; testing how
-              much AI agents accelerate development for a designer who codes but
-              isn&apos;t a full-time developer.
+              much AI agents accelerate development for a design engineer
+              working across design and code.
             </p>
-            <p>
-              Claude Code excelled at architectural tasks: structuring the
-              project, writing the Figma tree traversal logic, handling edge
-              cases. Codex was useful for quickly generating UI components and
-              utility functions. Where it got difficult: AI agents struggled
-              with Figma Plugin API context &mdash; it&apos;s a niche API with
-              limited examples in training data. Another issue &mdash;
-              coordination between two agents that didn&apos;t know what each
-              other had done.
-            </p>
-            <p>
-              AI agents sped up development roughly 2&ndash;3x for a project of
-              this scope. But they don&apos;t replace domain
-              understanding &mdash; I needed to know the Figma API to validate
-              and steer what the agents generated. The &ldquo;Design
-              Engineer&rdquo; role in this process isn&apos;t just writing
-              prompts &mdash; it&apos;s being the architect of the solution,
-              using AI as a multiplier.
-            </p>
+            <div className="flex flex-col gap-3">
+              <p className="font-semibold">What Worked Well</p>
+              <p>
+                Claude Code excelled at architectural tasks: structuring the
+                project, writing the Figma tree traversal logic, handling edge
+                cases. Codex was useful for quickly generating UI components and
+                utility functions.
+              </p>
+            </div>
+            <div className="flex flex-col gap-3">
+              <p className="font-semibold">Where It Got Difficult</p>
+              <p>
+                AI agents struggled with Figma Plugin API context &mdash;
+                it&apos;s a niche API with limited examples in training data.
+                Another issue &mdash; coordination between two agents that
+                didn&apos;t know what each other had done.
+              </p>
+            </div>
+            <div className="flex flex-col gap-3">
+              <p className="font-semibold">Overall Impact</p>
+              <p>
+                AI agents sped up development roughly 2&ndash;3x for a project
+                of this scope. But they don&apos;t replace domain
+                understanding &mdash; I needed to know the Figma API to validate
+                and steer what the agents generated.
+              </p>
+            </div>
           </>
         ),
       },
       {
         title: "Results and Impact",
+        layout: "narrow",
         content: (
           <>
-            <p>
-              <strong>For the task:</strong> The token migration of the master
-              template &mdash; estimated at 20&ndash;30 hours of manual
-              work &mdash; was completed in a few hours (including mapping
-              configuration and result verification).
-            </p>
-            <p>
-              <strong>For the team:</strong> The plugin became a standard tool
-              for style replacement tasks. Other designers on the team use it
-              when updating components and migrating between design system
-              versions.
-            </p>
-            <p>
-              <strong>For the community:</strong> The plugin was published on
-              Figma Community and has gained 200+ users &mdash; confirming that
-              bulk style replacement is a common pain point beyond our team.
-            </p>
+            <div className="flex flex-col gap-3">
+              <p className="font-semibold">For the task</p>
+              <p>
+                The token migration of the master template &mdash; estimated at
+                20&ndash;30 hours of manual work &mdash; was completed in a few
+                hours (including mapping configuration and result verification).
+              </p>
+            </div>
+            <div className="flex flex-col gap-3">
+              <p className="font-semibold">For the team</p>
+              <p>
+                The plugin became a standard tool for style replacement tasks.
+                Other designers on the team use it when updating components and
+                migrating between design system versions.
+              </p>
+            </div>
+            <div className="flex flex-col gap-3">
+              <p className="font-semibold">For the community</p>
+              <p>
+                The plugin was published on Figma Community and has gained 200+
+                users &mdash; confirming that bulk style replacement is a common
+                pain point beyond our team.
+              </p>
+            </div>
           </>
         ),
-        imagePlaceholder:
-          "Plugin in action / final replacement result on a real file",
       },
       {
-        title: "What I'd Do Differently",
+        title: "What I\u2019d Do Differently",
+        layout: "narrow",
         content: (
-          <>
+          <div className="flex flex-col gap-3">
             <p>
-              Involve teammates in testing earlier. The first version of the
+              Share the plugin with the team earlier. The first version of the
               interface made sense to me but confused new users. If I&apos;d
-              shown the prototype to the team a day sooner, onboarding and the
-              product tour would have been built in from the start.
-            </p>
-            <p>
-              Add usage analytics. Right now I don&apos;t know exactly which
-              features the 200+ users rely on most. Built-in analytics would
-              help prioritize further development.
+              shown the prototype to designers a day sooner, their feedback
+              would have shaped onboarding and the product tour from the
+              start &mdash; not as a late addition.
             </p>
             <p>
               Establish a stricter AI agent workflow from day one. Early on, I
               switched between Claude Code and Codex haphazardly. Over time I
               realized it&apos;s more effective to divide responsibilities:
               architecture and logic go to Claude Code, UI generation goes to
-              Codex.
+              Codex. That principle was worth locking in from the start.
             </p>
-          </>
+          </div>
         ),
       },
     ],
@@ -463,16 +607,16 @@ export const caseStudies: CaseStudyContent[] = [
         content: (
           <>
             <p>
-              During my time at Brainrocket (2022&ndash;2024), I designed 7
-              iGaming brands &mdash; online casinos and sportsbooks, each with
-              its own identity, audience, and visual direction &mdash; all
-              running on a shared platform and design system.
+              A selection of projects from my time at Brainrocket &mdash; an
+              iGaming company running 10+ casino and sportsbook brands on a
+              shared platform. My role evolved from executing UI tasks on
+              individual brands to owning design concepts and coordinating
+              design teams.
             </p>
             <p>
-              My role evolved through this period: from Product Designer on
-              individual brands, to Senior Product Designer owning multiple
-              brands simultaneously, to Lead Designer on Betoro, where I was
-              responsible for the full design direction of a brand from scratch.
+              <strong>Role:</strong> Product Designer &rarr; Senior Product
+              Designer &middot; <strong>Industry:</strong> iGaming &middot;{" "}
+              <strong>Period:</strong> 2022&ndash;2025
             </p>
           </>
         ),
@@ -482,18 +626,21 @@ export const caseStudies: CaseStudyContent[] = [
         content: (
           <>
             <p>
-              Betoro is a Danish online casino and sportsbook brand that I led
-              from concept to launch. As the Lead Designer, I owned the full
-              design direction &mdash; from brand identity and visual language to
-              product UX across web and mobile. This was the project where I
-              stepped into a leadership role, coordinating with stakeholders,
-              guiding junior designers, and making final design decisions across
-              the entire product surface.
+              <strong>Role:</strong> Senior Product Designer
             </p>
             <p>
-              Betoro targets the Danish market with a clean, confident visual
-              identity &mdash; bold uppercase logotype, dark theme, and a design
-              language that feels more premium sportsbook than flashy casino.
+              A Danish online casino and sportsbook. I created the initial
+              design concept &mdash; visual identity, color palette, typography,
+              and key page layouts &mdash; which was approved by stakeholders
+              and became the foundation for the product. From there, I worked
+              with two other designers (Senior and Middle) to design the full
+              website and mobile app.
+            </p>
+            <p>
+              Betoro targets the Danish market with a clean, dark-themed visual
+              identity that feels more premium sportsbook than flashy
+              casino &mdash; built for a regulated Nordic market where trust and
+              clarity matter.
             </p>
           </>
         ),
@@ -505,14 +652,24 @@ export const caseStudies: CaseStudyContent[] = [
       {
         title: "Swiper.dk / Swiper.se",
         content: (
-          <p>
-            A casino product built around a TikTok-style vertical feed &mdash;
-            users swipe through short-form content mixing playable games,
-            entertainment videos, and promotions. I designed the full product
-            experience across web and mobile (Flutter), including the core
-            Shorts mechanic, sportsbook section, and promotional flows. This
-            brand later became its own detailed case study.
-          </p>
+          <>
+            <p>
+              <strong>Role:</strong> Senior Product Designer
+            </p>
+            <p>
+              A casino product built around a TikTok-style vertical
+              feed &mdash; users swipe through short-form content mixing
+              playable games, videos, and promotions. This was a strategically
+              important project for the company: the Shorts mechanic we designed
+              became a platform-wide feature adopted across other brands.
+            </p>
+            <p>
+              I worked as part of a three-designer team on the full product
+              experience across web and mobile (Flutter) &mdash; including the
+              core Shorts feed, sportsbook section, and promotional flows.
+            </p>
+            <p>&rarr; See full Swiper case study</p>
+          </>
         ),
         imagePlaceholder: "Swiper — shorts feed and key screens",
         videoUrl:
@@ -521,14 +678,21 @@ export const caseStudies: CaseStudyContent[] = [
       {
         title: "Spinnit.com",
         content: (
-          <p>
-            Spinnit followed a similar concept to Swiper &mdash; a casino
-            product with a strong content-driven experience &mdash; but with a
-            completely different visual identity and tone. Where Swiper leaned
-            into dark, immersive aesthetics, Spinnit explored a different
-            stylistic direction while keeping the same platform foundation
-            underneath.
-          </p>
+          <>
+            <p>
+              <strong>Role:</strong> Senior Product Designer
+            </p>
+            <p>
+              Built on the same platform and Shorts-driven concept as Swiper,
+              but repositioned with a different visual identity &mdash; dark
+              theme with bold green accents and a more traditional casino
+              layout. The design challenge was adapting a novel interaction
+              pattern (vertical feed) to a brand that needed to feel familiar to
+              a more conventional casino audience. I handled the product design
+              across key pages and flows, balancing the shared foundation with a
+              distinct brand personality.
+            </p>
+          </>
         ),
         imagePlaceholder:
           "Spinnit — homepage and key product screens showing the brand's distinct visual style",
@@ -538,14 +702,23 @@ export const caseStudies: CaseStudyContent[] = [
       {
         title: "WildRobin.com",
         content: (
-          <p>
-            WildRobin is a casino and sportsbook brand for the German market
-            with a warm, adventure-themed identity built around a Robin Hood
-            mascot. The brand includes gamification features like Wheel of
-            Fortune, Spin Rally, Missions, and Tournaments, which required
-            designing engagement loops on top of the standard casino and
-            sportsbook flows.
-          </p>
+          <>
+            <p>
+              <strong>Role:</strong> Senior Product Designer
+            </p>
+            <p>
+              A casino and sportsbook for the German market with a warm,
+              adventure-themed identity built around a Robin Hood
+              mascot &mdash; brown and gold tones, illustrated characters,
+              ornate UI elements. I coordinated a team of 3 designers and we
+              shipped the full product in 2.5 weeks &mdash; possible because of
+              the team&apos;s deep experience with the shared platform and a
+              fast decision-making cadence that kept design reviews tight and
+              blockers short-lived. The brand includes a rich gamification
+              layer: Wheel of Fortune, Spin Rally, Challenges, Tournaments,
+              Shop, and VIP Club.
+            </p>
+          </>
         ),
         imagePlaceholder:
           "WildRobin — homepage with the Robin Hood mascot, warm color palette, and gamification features",
@@ -555,14 +728,20 @@ export const caseStudies: CaseStudyContent[] = [
       {
         title: "Slotuna.com",
         content: (
-          <p>
-            Slotuna is a fantasy-themed casino and sportsbook targeting the
-            German market. The visual identity leans into a dark teal palette
-            with illustrated warriors, mages, and mythical characters &mdash;
-            giving the brand a distinct RPG-like atmosphere. The product
-            includes a full gamification layer: Challenges, Tournaments, Bonus
-            Crab, Shop, and VIP Levels.
-          </p>
+          <>
+            <p>
+              <strong>Role:</strong> Product Designer
+            </p>
+            <p>
+              A fantasy-themed casino and sportsbook for the German
+              market &mdash; dark teal palette with medieval illustrated
+              characters in an Assassin&apos;s Creed-inspired aesthetic. The
+              main design challenge was making dense gamification features
+              (Challenges, Tournaments, Bonus Crab, Shop, VIP Levels) feel
+              cohesive within a heavily themed visual world without sacrificing
+              usability.
+            </p>
+          </>
         ),
         imagePlaceholder:
           "Slotuna — homepage with fantasy illustrations, teal color palette, and gamification sidebar",
@@ -572,13 +751,20 @@ export const caseStudies: CaseStudyContent[] = [
       {
         title: "Kingmaker.com",
         content: (
-          <p>
-            Kingmaker is a premium-styled casino and sportsbook with a
-            purple-and-gold palette, 3D-rendered coins and crowns, and a strong
-            emphasis on gamification. The brand features Fortune Wheel,
-            Challenges, Tournaments, Bonus Crab, a Shop, and VIP
-            Levels &mdash; one of the richest feature sets on the platform.
-          </p>
+          <>
+            <p>
+              <strong>Role:</strong> Product Designer
+            </p>
+            <p>
+              A premium-styled casino and sportsbook with a purple-and-gold
+              palette and 3D-rendered coins and crowns. One of the richest
+              feature sets on the platform &mdash; Fortune Wheel, Challenges,
+              Tournaments, Bonus Crab, Shop, and VIP Levels. I focused on UI
+              execution with strong attention to detail, including graphics
+              optimization and smooth animations to keep performance tight
+              despite heavy visual assets.
+            </p>
+          </>
         ),
         imagePlaceholder:
           "Kingmaker — homepage with purple-gold palette, 3D crown visuals, and gamification features",
@@ -588,13 +774,20 @@ export const caseStudies: CaseStudyContent[] = [
       {
         title: "Spinrollz",
         content: (
-          <p>
-            Spinrollz is a casino and sportsbook with the lightest visual tone
-            on the platform &mdash; a soft lavender-blue palette, cartoon-style
-            category illustrations, and a friendly, approachable feel. The brand
-            targets a casual audience and leans away from the dark,
-            high-intensity aesthetic typical of most casino products.
-          </p>
+          <>
+            <p>
+              <strong>Role:</strong> Product Designer
+            </p>
+            <p>
+              The lightest visual tone on the platform &mdash; a soft
+              lavender-blue palette with a cartoon wrestler mascot and
+              illustrated category cards. The deliberate choice to lean away
+              from the dark, high-intensity aesthetic typical of casino products
+              was a bet on reaching a more casual audience. I worked on UI, art
+              assets, and micro-interactions &mdash; including graphics
+              optimization and smooth animations.
+            </p>
+          </>
         ),
         imagePlaceholder:
           "Spinrollz — homepage with pastel lavender-blue palette and cartoon category illustrations",
@@ -606,22 +799,24 @@ export const caseStudies: CaseStudyContent[] = [
         content: (
           <>
             <p>
-              Working across 7 brands on a shared platform taught me how to
-              balance consistency with differentiation. Every brand ran on the
-              same tech stack and design system, but each needed its own
-              identity, tone, and UX priorities.
+              All brands ran on a shared platform and design system &mdash; same
+              tech stack, same structural patterns (navigation, game lobbies,
+              sportsbook, registration), but each brand needed its own visual
+              identity, token set, and art direction.
             </p>
             <p>
-              The key skill I developed here was designing at scale. The
-              platform&apos;s shared design system provided the structural
-              foundation &mdash; navigation patterns, game lobbies, sportsbook
-              layouts, registration flows &mdash; but each brand required its
-              own token set, visual language, and art direction. Over time, new
+              The key challenge was designing at scale: making sure brand-level
+              customization never broke the underlying system, especially as new
               platform-wide features like gamification were introduced and had to
-              be adapted across brands with very different visual identities,
-              meaning I had to design flexible patterns that could absorb each
-              brand&apos;s personality without requiring a full redesign every
-              time.
+              work across brands with very different aesthetics.
+            </p>
+            <p>
+              My role grew through this period &mdash; from UI execution on
+              individual brands to owning design concepts, coordinating teams,
+              and shipping products under tight deadlines. This experience
+              across multiple brands led to my transition to the platform team,
+              where I worked on the shared design system and core components
+              powering all of the company&apos;s brands.
             </p>
           </>
         ),

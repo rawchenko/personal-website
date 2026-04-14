@@ -91,13 +91,13 @@ export const projects: Project[] = [
   },
   {
     slug: "layersweep",
-    title: "LayerSweep — Figma Plugin",
+    title: "LayerSweep",
     description:
-      "Built a Figma plugin for bulk style replacement that automates design system migrations. Published on Figma Community with 200+ users.",
+      "is a figma plugin that automates bulk style replacement — built to speed up design system migrations",
     tags: ["Design Engineering", "Figma API", "Tooling"],
     year: "2024",
     role: "Design Engineer",
-    thumbnail: asset("/images/projects/layersweep-cover.png"),
+    thumbnail: asset("/images/projects/layersweep-scan.png"),
     type: "case",
   },
   {
@@ -115,10 +115,10 @@ export const projects: Project[] = [
     slug: "brainrocket-showcase",
     title: "Brainrocket — iGaming Brand Showcase",
     description:
-      "A selection of 7 iGaming brands I designed — from product design on individual brands to leading a brand from scratch.",
+      "A selection of projects from my time at Brainrocket — an iGaming company running 10+ casino and sportsbook brands on a shared platform.",
     tags: ["Product Design", "iGaming", "Branding"],
-    year: "2022–2024",
-    role: "Product → Senior → Lead Designer",
+    year: "2022–2025",
+    role: "Product Designer → Senior Product Designer",
     thumbnail: asset("/images/projects/brainrocket-showcase.png"),
     type: "case",
   },

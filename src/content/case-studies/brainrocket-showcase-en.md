@@ -1,23 +1,20 @@
 # Brainrocket Showcase
 
-A selection of iGaming brands I designed during my time at Brainrocket — from product design to leading a brand from scratch.
+A selection of projects from my time at Brainrocket — an iGaming company running 10+ casino and sportsbook brands on a shared platform. My role evolved from executing UI tasks on individual brands to owning design concepts and coordinating design teams.
 
-**Role:** Product Designer → Senior Product Designer → Lead Designer
-**Industry:** iGaming, Online Casino, Sportsbook
-**Period:** 2022–2024
+**Role:** Product Designer → Senior Product Designer
+**Industry:** iGaming
+**Period:** 2022–2025
 
 ---
 
 ## Betoro.dk
 
-**Role:** Lead Designer
+**Role:** Senior Product Designer
 
-Betoro is a Danish online casino and sportsbook brand that I led from concept to launch. As the Lead Designer, I owned the full design direction — from brand identity and visual language to product UX across web and mobile. This was the project where I stepped into a leadership role, coordinating with stakeholders, guiding junior designers, and making final design decisions across the entire product surface.
+A Danish online casino and sportsbook. I created the initial design concept — visual identity, color palette, typography, and key page layouts — which was approved by stakeholders and became the foundation for the product. From there, I worked with two other designers (Senior and Middle) to design the full website and mobile app.
 
-Betoro targets the Danish market with a clean, confident visual identity — bold uppercase logotype, dark theme, and a design language that feels more premium sportsbook than flashy casino. The brand was built to stand out in a regulated Nordic market where trust and clarity matter as much as entertainment value.
-
-*[Image: Betoro — brand identity, logotype, and visual language. Show the dark theme with key brand elements.]*
-*[Image: Betoro — web and mobile product screens. Homepage hero, game lobby, and sportsbook.]*
+Betoro targets the Danish market with a clean, dark-themed visual identity that feels more premium sportsbook than flashy casino — built for a regulated Nordic market where trust and clarity matter.
 
 ---
 
@@ -25,11 +22,11 @@ Betoro targets the Danish market with a clean, confident visual identity — bol
 
 **Role:** Senior Product Designer
 
-A casino product built around a TikTok-style vertical feed — users swipe through short-form content mixing playable games, entertainment videos, and promotions. I designed the full product experience across web and mobile (Flutter), including the core Shorts mechanic, sportsbook section, and promotional flows. This brand later became its own detailed case study.
+A casino product built around a TikTok-style vertical feed — users swipe through short-form content mixing playable games, videos, and promotions. This was a strategically important project for the company: the Shorts mechanic we designed became a platform-wide feature adopted across other brands.
 
-→ [See full Swiper case study]
+I worked as part of a three-designer team on the full product experience across web and mobile (Flutter) — including the core Shorts feed, sportsbook section, and promotional flows.
 
-*[Image: Swiper — shorts feed and key screens]*
+→ See full Swiper case study
 
 ---
 
@@ -37,19 +34,7 @@ A casino product built around a TikTok-style vertical feed — users swipe throu
 
 **Role:** Senior Product Designer
 
-Spinnit followed a similar concept to Swiper — a casino product with a strong content-driven experience — but with a completely different visual identity and tone. Where Swiper leaned into dark, immersive aesthetics, Spinnit explored a different stylistic direction while keeping the same platform foundation underneath. I handled the product design across key pages and flows, adapting the shared platform to a new brand personality.
-
-*[Image: Spinnit — homepage and key product screens showing the brand's distinct visual style.]*
-
----
-
-## Spinfest.com
-
-**Role:** Senior Product Designer
-
-Spinfest was one of the more playful brands on the platform — a casino with a fruit-themed waterpark aesthetic. The visual direction was bright, saturated, and unapologetically fun, targeting a casual audience that responds to lighthearted, summer-vibes branding. I worked on the visual concept and key product pages, translating an unusual theme into a cohesive casino experience.
-
-*[Image: Spinfest — key screens showing the vibrant fruit/waterpark visual direction.]*
+Built on the same platform and Shorts-driven concept as Swiper, but repositioned with a different visual identity — dark theme with bold green accents and a more traditional casino layout. The design challenge was adapting a novel interaction pattern (vertical feed) to a brand that needed to feel familiar to a more conventional casino audience. I handled the product design across key pages and flows, balancing the shared foundation with a distinct brand personality.
 
 ---
 
@@ -57,19 +42,15 @@ Spinfest was one of the more playful brands on the platform — a casino with a 
 
 **Role:** Senior Product Designer
 
-WildRobin is a casino and sportsbook brand for the German market with a warm, adventure-themed identity built around a Robin Hood mascot. The visual direction — brown and gold tones, illustrated characters, ornate UI elements — sets it apart from the typical dark-themed casino. The brand includes gamification features like Wheel of Fortune, Spin Rally, Missions, and Tournaments, which required designing engagement loops on top of the standard casino and sportsbook flows.
-
-*[Image: WildRobin — homepage with the Robin Hood mascot, warm color palette, and gamification features in the sidebar.]*
+A casino and sportsbook for the German market with a warm, adventure-themed identity built around a Robin Hood mascot — brown and gold tones, illustrated characters, ornate UI elements. I coordinated a team of 3 designers and we shipped the full product in 2.5 weeks — possible because of the team's deep experience with the shared platform and a fast decision-making cadence that kept design reviews tight and blockers short-lived. The brand includes a rich gamification layer: Wheel of Fortune, Spin Rally, Challenges, Tournaments, Shop, and VIP Club.
 
 ---
 
 ## Slotuna.com
 
-**Role:** Product Designer → Senior Product Designer
+**Role:** Product Designer
 
-Slotuna is a fantasy-themed casino and sportsbook targeting the German market. The visual identity leans into a dark teal palette with illustrated warriors, mages, and mythical characters — giving the brand a distinct RPG-like atmosphere. The product includes a full gamification layer: Challenges, Tournaments, Bonus Crab, Shop, and VIP Levels. This was one of the brands where my role grew over time — I started as a Product Designer and took on more ownership as the project expanded.
-
-*[Image: Slotuna — homepage with fantasy illustrations, teal color palette, and the gamification sidebar (Challenges, Tournaments, VIP Levels).]*
+A fantasy-themed casino and sportsbook for the German market — dark teal palette with medieval illustrated characters in an Assassin's Creed-inspired aesthetic. The main design challenge was making dense gamification features (Challenges, Tournaments, Bonus Crab, Shop, VIP Levels) feel cohesive within a heavily themed visual world without sacrificing usability.
 
 ---
 
@@ -77,19 +58,7 @@ Slotuna is a fantasy-themed casino and sportsbook targeting the German market. T
 
 **Role:** Product Designer
 
-Kingmaker is a premium-styled casino and sportsbook with a purple-and-gold palette, 3D-rendered coins and crowns, and a strong emphasis on gamification. The brand features Fortune Wheel, Challenges, Tournaments, Bonus Crab, a Shop, and VIP Levels — one of the richest feature sets on the platform. I designed the product pages and visual concept, balancing a dense feature set with a clean, navigable experience.
-
-*[Image: Kingmaker — homepage with the purple-gold palette, 3D crown visuals, and gamification features (Fortune Wheel, Challenges, Shop, VIP Levels).]*
-
----
-
-## Jackpot Frenzy
-
-**Role:** Product Designer
-
-Jackpot Frenzy was one of the wildest brands on the platform visually — loud, bright, and intentionally over-the-top. The design leaned into maximum energy: saturated colors, bold typography, and a chaotic-fun aesthetic that matched the brand name. This was one of my earlier projects at Brainrocket, and working on such an expressive visual direction helped me understand how far a brand's identity can push while still working within the shared platform's constraints.
-
-*[Image: Jackpot Frenzy — key screens showing the bold, high-energy visual style.]*
+A premium-styled casino and sportsbook with a purple-and-gold palette and 3D-rendered coins and crowns. One of the richest feature sets on the platform — Fortune Wheel, Challenges, Tournaments, Bonus Crab, Shop, and VIP Levels. I focused on UI execution with strong attention to detail, including graphics optimization and smooth animations to keep performance tight despite heavy visual assets.
 
 ---
 
@@ -97,18 +66,14 @@ Jackpot Frenzy was one of the wildest brands on the platform visually — loud, 
 
 **Role:** Product Designer
 
-Spinrollz is a casino and sportsbook with the lightest visual tone on the platform — a soft lavender-blue palette, cartoon-style category illustrations, and a friendly, approachable feel. The brand targets a casual audience and leans away from the dark, high-intensity aesthetic typical of most casino products. I worked on the visual concept and product pages, exploring how far the platform's shared components could stretch to support a completely different mood.
-
-*[Image: Spinrollz — homepage with the pastel lavender-blue palette and cartoon category illustrations.]*
+The lightest visual tone on the platform — a soft lavender-blue palette with a cartoon wrestler mascot and illustrated category cards. The deliberate choice to lean away from the dark, high-intensity aesthetic typical of casino products was a bet on reaching a more casual audience. I worked on UI, art assets, and micro-interactions — including graphics optimization and smooth animations.
 
 ---
 
 ## What Tied It All Together
 
-Working across 9 brands on a shared platform taught me how to balance consistency with differentiation. Every brand ran on the same tech stack and design system, but each needed its own identity, tone, and UX priorities — from WildRobin's warm adventure theme to Jackpot Frenzy's chaotic energy to Spinrollz's soft pastels.
+All brands ran on a shared platform and design system — same tech stack, same structural patterns (navigation, game lobbies, sportsbook, registration), but each brand needed its own visual identity, token set, and art direction.
 
-The key skill I developed here was designing at scale. The platform's shared design system provided the structural foundation — navigation patterns, game lobbies, sportsbook layouts, registration flows — but each brand required its own token set, visual language, and art direction. I worked closely with art teams, other designers, and developers to ensure that brand-level customization never broke the underlying system.
+The key challenge was designing at scale: making sure brand-level customization never broke the underlying system, especially as new platform-wide features like gamification were introduced and had to work across brands with very different aesthetics.
 
-Over time, new platform-wide features like gamification (Challenges, Tournaments, VIP Levels, Shop) were introduced and had to be adapted across brands with very different visual identities. This meant designing flexible patterns that could absorb each brand's personality without requiring a full redesign every time.
-
-My role evolved through this period — from Product Designer on individual brands to Senior Product Designer owning multiple brands simultaneously, and eventually to Lead Designer on Betoro, where I was responsible for the full design direction of a brand from scratch.
+My role grew through this period — from UI execution on individual brands to owning design concepts, coordinating teams, and shipping products under tight deadlines. This experience across multiple brands led to my transition to the platform team, where I worked on the shared design system and core components powering all of the company's brands.

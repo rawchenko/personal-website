@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import Image from "next/image";
 import { useRef, useState, useEffect, useCallback } from "react";
 import { Dithering, GrainGradient, MeshGradient } from "@paper-design/shaders-react";
@@ -36,7 +37,6 @@ interface CaseCardProps {
   shaderConfig?: ShaderConfig;
   images?: CaseImage[];
   carousel?: CarouselConfig;
-  onCaseClick?: (slug: string) => void;
 }
 
 function ShaderRenderer({ config, inView }: { config: ShaderConfig; inView: boolean }) {
@@ -53,7 +53,16 @@ function ShaderRenderer({ config, inView }: { config: ShaderConfig; inView: bool
   }
 }
 
-export function CaseCard({ projectSlug, label, description, dark, background, shaderConfig, images, carousel, onCaseClick }: CaseCardProps) {
+export function CaseCard({
+  projectSlug,
+  label,
+  description,
+  dark,
+  background,
+  shaderConfig,
+  images,
+  carousel,
+}: CaseCardProps) {
   const project = getProjectBySlug(projectSlug);
   const cardRef = useRef<HTMLDivElement>(null);
   const [inView, setInView] = useState(false);
@@ -87,15 +96,9 @@ export function CaseCard({ projectSlug, label, description, dark, background, sh
 
   return (
     <CursorFollower>
-      <a
+      <Link
         href={`/work/${project.slug}`}
         className="group block active:scale-[0.99] transition-transform duration-200"
-        onClick={(e) => {
-          if (onCaseClick) {
-            e.preventDefault();
-            onCaseClick(projectSlug);
-          }
-        }}
       >
         <div
           ref={cardRef}
@@ -162,7 +165,7 @@ export function CaseCard({ projectSlug, label, description, dark, background, sh
             </svg>
           </div>
         </div>
-      </a>
+      </Link>
     </CursorFollower>
   );
 }

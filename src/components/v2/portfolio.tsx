@@ -6,7 +6,6 @@ import { AnimateIn } from "@/components/animate-in";
 import { Lightbox } from "@/components/lightbox";
 import { asset } from "@/lib/utils";
 import { CaseCard, type ShaderConfig, type CarouselConfig } from "./case-card";
-import { CaseStudyOverlay } from "./case-study-overlay";
 import { ImageCard } from "./image-card";
 import { ExperienceCard } from "./experience-card";
 import { ApplicationsCard } from "./applications-card";
@@ -275,8 +274,6 @@ export function Portfolio() {
     rect: DOMRect;
   } | null>(null);
 
-  const [activeCaseSlug, setActiveCaseSlug] = useState<string | null>(null);
-
   let itemIndex = 0;
 
   return (
@@ -296,7 +293,6 @@ export function Portfolio() {
                   shaderConfig={row.shaderConfig}
                   images={row.images}
                   carousel={row.carousel}
-                  onCaseClick={(slug) => setActiveCaseSlug(slug)}
                 />
               </AnimateIn>
             );
@@ -343,16 +339,6 @@ export function Portfolio() {
             slug={lightbox.slug}
             sourceRect={lightbox.rect}
             onClose={() => setLightbox(null)}
-          />
-        )}
-      </AnimatePresence>
-      <AnimatePresence>
-        {activeCaseSlug && (
-          <CaseStudyOverlay
-            key="case-study-overlay"
-            slug={activeCaseSlug}
-            onClose={() => setActiveCaseSlug(null)}
-            onNavigate={(slug) => setActiveCaseSlug(slug)}
           />
         )}
       </AnimatePresence>
