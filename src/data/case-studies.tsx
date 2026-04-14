@@ -64,9 +64,10 @@ const layersweepMedia = {
 } as const;
 
 export const caseStudies: CaseStudyContent[] = [
-{
+  {
     slug: "layersweep",
-    ctaUrl: "https://www.figma.com/community/plugin/1505653916498498498",
+    ctaUrl:
+      "https://www.figma.com/community/plugin/1602717091443258096/layersweep-bulk-style-swap-for-figma",
     ctaLabel: "Open in Figma Community",
     sections: [
       {
@@ -77,30 +78,35 @@ export const caseStudies: CaseStudyContent[] = [
             <div className="flex flex-col gap-3">
               <p className="font-semibold">The Problem</p>
               <p>
-                Our platform was migrating to a completely new token structure.
-                Every text, color, and effect style in the master template had
-                to be swapped for its new counterpart &mdash; thousands of
-                layers, no naming overlap between old and new tokens. Manual
-                replacement: 20&ndash;30 hours of tedious, error-prone work.
+                Our team was moving to a new token structure across a large
+                Figma file with thousands of layers. The old and new styles did
+                not share a naming system, so replacing them by hand would have
+                taken days and created a lot of room for mistakes.
               </p>
             </div>
             <div className="flex flex-col gap-3">
               <p className="font-semibold">My Role</p>
-              <p>Design Engineer</p>
+              <p>Designer and Engineer</p>
             </div>
             <div className="flex flex-col gap-3">
               <p className="font-semibold">Tools</p>
-              <p>Figma, Claude Code, Codex</p>
+              <p>Figma Plugin API, TypeScript, Claude Code, OpenAI Codex</p>
             </div>
           </>
         ),
         rightColumn: (
           <div className="flex flex-col gap-3">
-            <p className="font-semibold">Overview</p>
+            <p className="font-semibold">Project Overview</p>
             <p>
-              I initiated and built a Figma plugin that scans a file for bound
-              styles, lets users configure old-to-new mapping, and applies
-              replacements in bulk. I published it on Figma Community.
+              I built LayerSweep to make style migration in Figma less manual
+              and less risky. The plugin scans a file for bound styles, lets
+              users choose what to replace, maps old styles to new ones, and
+              applies the changes in bulk. I built it around a real migration
+              task inside our team, where the main challenge was not scale
+              alone, but the fact that the old and new styles did not line up
+              by name. After the core workflow worked on the actual file, I
+              cleaned up the experience, made it usable for other designers,
+              and published it on Figma Community.
             </p>
           </div>
         ),
@@ -119,8 +125,8 @@ export const caseStudies: CaseStudyContent[] = [
                 </span>
               </div>
               <p>
-                Eliminate manual style replacement and make token migrations
-                painless for any designer on the team.
+                Solve a real problem for the team instead of building a
+                speculative side project.
               </p>
             </div>
             <div className="flex flex-col gap-3">
@@ -133,8 +139,8 @@ export const caseStudies: CaseStudyContent[] = [
                 </span>
               </div>
               <p>
-                Own the full cycle from UX decisions to production code, proving
-                the Design Engineer skillset in practice.
+                Take full ownership across product thinking, interface design,
+                and implementation.
               </p>
             </div>
             <div className="flex flex-col gap-3">
@@ -147,16 +153,15 @@ export const caseStudies: CaseStudyContent[] = [
                 </span>
               </div>
               <p>
-                Use Claude Code and Codex as primary coding tools and form an
-                honest picture of where AI agents accelerate work and where they
-                fall short.
+                Figure out where AI tools actually save time and where they
+                still need strong direction.
               </p>
             </div>
           </div>
         ),
       },
       {
-        title: "Approach: From Hypothesis to Tool",
+        title: "Approach",
         layout: "blocks-with-media",
         blockMediaGap: "large",
         content: null,
@@ -165,19 +170,12 @@ export const caseStudies: CaseStudyContent[] = [
             subHeader: "Validating the Hypothesis (Days 1\u20132)",
             content: (
               <>
+                <p>I broke the project into three parts.</p>
                 <p>
-                  Before committing to full development, I needed to confirm
-                  that the Figma API actually supported what I had in mind:
-                  recursively traversing the layer tree, reading bound styles,
-                  and programmatically replacing them. I built a minimal
-                  prototype &mdash; no UI, pure console logic &mdash; and
-                  confirmed it was feasible.
-                </p>
-                <p>
-                  The key question at this stage: can you reliably map old
-                  styles to new ones when their names don&apos;t match and their
-                  structures differ? The answer: yes, but it requires a
-                  well-designed interface for configuring the mapping.
+                  First, I checked whether the Figma Plugin API could support
+                  the core workflow. I built a small prototype to confirm that
+                  I could scan layers, read style bindings, and replace styles
+                  reliably.
                 </p>
               </>
             ),
@@ -191,13 +189,10 @@ export const caseStudies: CaseStudyContent[] = [
             subHeader: "Working Version (Week 1)",
             content: (
               <p>
-                Over the first week, I built the plugin to a state where it
-                solved the core problem: file scanning, replacement
-                configuration, and batch-applying new styles. The architecture
-                splits into two layers &mdash; the sandbox thread handles
-                recursive tree traversal and style resolution, while the UI
-                thread manages state and user interaction through Figma&apos;s
-                messaging API.
+                Second, I built the working version around the actual migration
+                task. The first goal was simple: make the plugin useful enough
+                to get the job done. That meant scanning files, selecting
+                styles, assigning replacements, and applying changes in bulk.
               </p>
             ),
           },
@@ -205,11 +200,10 @@ export const caseStudies: CaseStudyContent[] = [
             subHeader: "UX/UI Polish (Week 2)",
             content: (
               <p>
-                With the instrumental task done, I focused on making the plugin
-                usable not just for myself, but for the team &mdash; and
-                potentially for any designer facing a similar challenge. That
-                meant: thoughtful onboarding, clear states, and visual
-                consistency with Figma&apos;s own interface.
+                Third, I cleaned up the experience so other people could use it
+                without explanation. Once the core logic worked, I focused on
+                onboarding, clearer states, safer review steps, and a UI that
+                felt at home inside Figma.
               </p>
             ),
             imageUrl: layersweepMedia.polish,
@@ -221,7 +215,7 @@ export const caseStudies: CaseStudyContent[] = [
         ],
       },
       {
-        title: "How it works",
+        title: "Features",
         layout: "blocks-with-media",
         content: null,
         blocks: [
@@ -229,11 +223,9 @@ export const caseStudies: CaseStudyContent[] = [
             subHeader: "Scoped Scan",
             content: (
               <p>
-                The plugin doesn&apos;t scan everything blindly. Users choose
-                which pages and layer types to include &mdash; instances,
-                components, frames &mdash; before the scan begins. This keeps
-                results relevant, especially in large files with dozens of
-                pages.
+                Users can choose which pages and layer types to include before
+                running a scan. This keeps the output focused, especially in
+                large files.
               </p>
             ),
             videoUrl:
@@ -243,11 +235,9 @@ export const caseStudies: CaseStudyContent[] = [
             subHeader: "Scan Results and Filtering",
             content: (
               <p>
-                Scan results are grouped by source: detached styles, remote
-                library, and local styles. Each style shows how many layers use
-                it. Users can expand any group down to individual tokens, search
-                by name, and filter by style type or layer type to narrow the
-                view.
+                The plugin groups detected styles by source and type, shows
+                usage counts, and supports search and filtering. Before
+                changing anything, users can see exactly what is in the file.
               </p>
             ),
             videoUrl:
@@ -257,10 +247,8 @@ export const caseStudies: CaseStudyContent[] = [
             subHeader: "Selecting Styles for Swap",
             content: (
               <p>
-                Users select which styles to replace directly from the scan
-                results via checkboxes &mdash; at the group level or
-                individually. Selected styles carry over to the Swap tab with
-                one click.
+                Styles can be selected in bulk or one by one. That makes the
+                workflow faster without taking control away from the user.
               </p>
             ),
             videoUrl:
@@ -269,33 +257,24 @@ export const caseStudies: CaseStudyContent[] = [
           {
             subHeader: "Choosing Target Styles",
             content: (
-              <>
-                <p>
-                  In the Swap tab, each selected style gets a mapping:
-                  old &rarr; new. Users choose the target style from a dropdown
-                  of available styles in the file. The same filtering system
-                  works here &mdash; you can narrow the options by layer type or
-                  location.
-                </p>
-                <p>
-                  I rejected automatic name-similarity matching &mdash; token
-                  names across versions rarely overlap, so it would create false
-                  confidence.
-                </p>
-              </>
+              <p>
+                I did not rely on automatic matching by name. In this kind of
+                migration, naming is often inconsistent, so forced guesses
+                would make the tool less trustworthy. Instead, users choose the
+                target styles directly.
+              </p>
             ),
             videoUrl:
               "https://pub-3dcbbf8f8f7140cb987df422a0768332.r2.dev/LayerSweep/04%20choosing-target-styles.mp4",
           },
           {
-            subHeader: "Review Result",
+            subHeader: "Review Results",
             content: (
               <p>
-                Before applying, the plugin shows a summary: how many layers
-                will be affected, which pages, and a warning if changes will
-                propagate through component instances. After the swap, users can
-                review the result screen to see what was updated, undo changes,
-                or drill down into affected layers grouped by context.
+                Before replacement starts, the plugin shows what will change
+                and where. That gives users a chance to catch bad mappings
+                before they commit. After the swap, users can review what was
+                updated, what failed, and which layers were affected.
               </p>
             ),
             videoUrl:
@@ -305,9 +284,8 @@ export const caseStudies: CaseStudyContent[] = [
             subHeader: "Dark and Light Theme",
             content: (
               <p>
-                The plugin adapts to the user&apos;s preferred appearance with
-                light, dark, and auto theme modes &mdash; consistent with
-                Figma&apos;s own interface.
+                The interface supports light, dark, and auto themes to match
+                the rest of the Figma environment.
               </p>
             ),
             videoUrl:
@@ -316,75 +294,46 @@ export const caseStudies: CaseStudyContent[] = [
         ],
       },
       {
-        title: "Building with AI Agents: What Worked and What Didn\u2019t",
+        title: "AI Agents Workflow",
         layout: "narrow",
         content: (
           <>
             <p>
-              All of LayerSweep&apos;s code was written using Claude Code and
-              OpenAI Codex. This was a deliberate experiment &mdash; testing how
-              much AI agents accelerate development for a design engineer
-              working across design and code.
+              I used Claude Code and Codex while building the plugin, but not
+              as a substitute for product or technical judgment.
             </p>
-            <div className="flex flex-col gap-3">
-              <p className="font-semibold">What Worked Well</p>
-              <p>
-                Claude Code excelled at architectural tasks: structuring the
-                project, writing the Figma tree traversal logic, handling edge
-                cases. Codex was useful for quickly generating UI components and
-                utility functions.
-              </p>
-            </div>
-            <div className="flex flex-col gap-3">
-              <p className="font-semibold">Where It Got Difficult</p>
-              <p>
-                AI agents struggled with Figma Plugin API context &mdash;
-                it&apos;s a niche API with limited examples in training data.
-                Another issue &mdash; coordination between two agents that
-                didn&apos;t know what each other had done.
-              </p>
-            </div>
-            <div className="flex flex-col gap-3">
-              <p className="font-semibold">Overall Impact</p>
-              <p>
-                AI agents sped up development roughly 2&ndash;3x for a project
-                of this scope. But they don&apos;t replace domain
-                understanding &mdash; I needed to know the Figma API to validate
-                and steer what the agents generated.
-              </p>
-            </div>
+            <p>
+              Claude Code helped most with structure and logic-heavy tasks.
+              Codex was useful for faster iteration on smaller UI and utility
+              pieces.
+            </p>
+            <p>
+              The weak point was the Figma Plugin API itself. It is specific
+              enough that I still had to verify methods, correct bad
+              assumptions, and steer the implementation. The main value was
+              speed, not autonomy.
+            </p>
           </>
         ),
       },
       {
-        title: "Results and Impact",
+        title: "Results",
         layout: "narrow",
         content: (
           <>
-            <div className="flex flex-col gap-3">
-              <p className="font-semibold">For the task</p>
-              <p>
-                The token migration of the master template &mdash; estimated at
-                20&ndash;30 hours of manual work &mdash; was completed in a few
-                hours (including mapping configuration and result verification).
-              </p>
-            </div>
-            <div className="flex flex-col gap-3">
-              <p className="font-semibold">For the team</p>
-              <p>
-                The plugin became a standard tool for style replacement tasks.
-                Other designers on the team use it when updating components and
-                migrating between design system versions.
-              </p>
-            </div>
-            <div className="flex flex-col gap-3">
-              <p className="font-semibold">For the community</p>
-              <p>
-                The plugin was published on Figma Community and has gained 200+
-                users &mdash; confirming that bulk style replacement is a common
-                pain point beyond our team.
-              </p>
-            </div>
+            <p>
+              The plugin turned a slow, repetitive migration task into a
+              workflow the team could actually work through in a reasonable
+              amount of time.
+            </p>
+            <p>
+              It also became a reusable internal tool instead of a one-off fix
+              for a single file.
+            </p>
+            <p>
+              After that, I published it on Figma Community so the project had
+              a public life beyond the original migration work.
+            </p>
           </>
         ),
       },
@@ -394,18 +343,19 @@ export const caseStudies: CaseStudyContent[] = [
         content: (
           <div className="flex flex-col gap-3">
             <p>
-              Share the plugin with the team earlier. The first version of the
-              interface made sense to me but confused new users. If I&apos;d
-              shown the prototype to designers a day sooner, their feedback
-              would have shaped onboarding and the product tour from the
-              start &mdash; not as a late addition.
+              I would bring other designers into testing earlier. The first
+              version made sense to me because I built it, but new users needed
+              more guidance than I expected.
             </p>
             <p>
-              Establish a stricter AI agent workflow from day one. Early on, I
-              switched between Claude Code and Codex haphazardly. Over time I
-              realized it&apos;s more effective to divide responsibilities:
-              architecture and logic go to Claude Code, UI generation goes to
-              Codex. That principle was worth locking in from the start.
+              I would also add lightweight analytics from the start. That would
+              make it easier to see which parts of the workflow people actually
+              use and where the tool still creates friction.
+            </p>
+            <p>
+              And I would define a clearer AI workflow earlier. The project
+              went more smoothly once I stopped switching tools randomly and
+              started using each one for the kind of work it handled best.
             </p>
           </div>
         ),

@@ -93,7 +93,7 @@ export const projects: Project[] = [
     slug: "layersweep",
     title: "LayerSweep",
     description:
-      "is a figma plugin that automates bulk style replacement — built to speed up design system migrations",
+      "A Figma plugin for bulk style replacement during design system migrations.",
     tags: ["Design Engineering", "Figma API", "Tooling"],
     year: "2024",
     role: "Design Engineer",
