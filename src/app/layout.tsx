@@ -13,6 +13,9 @@ export const metadata: Metadata = {
   title: "Evgenii Kravchenko — Senior Product Designer",
   description:
     "Senior Product Designer crafting end-to-end product UI, design systems, and internal tooling.",
+  icons: {
+    icon: "/icon.png",
+  },
 };
 
 export const viewport = {
