@@ -53,14 +53,10 @@ export interface CaseStudyContent {
 }
 
 const layersweepMedia = {
-  prototype:
-    "https://app.paper.design/file-assets/01KNH70K2R8QSW8HD5PA4XGN14/01KP48E5NPHJ7JQ06501R1BBX8.png",
-  polish:
-    "https://app.paper.design/file-assets/01KNH70K2R8QSW8HD5PA4XGN14/01KP48E5NJ2TPJQZFZTDH3HRNZ.png",
-  scan:
-    "https://app.paper.design/file-assets/01KNH70K2R8QSW8HD5PA4XGN14/01KP48HT815DFHX9PJ8SV964K8.png",
-  swap:
-    "https://app.paper.design/file-assets/01KNH70K2R8QSW8HD5PA4XGN14/01KP48J2Y17DK33AAKKTZ4F01J.png",
+  before: "/images/projects/layersweep-before.jpg",
+  after: "/images/projects/layersweep-after.jpg",
+  scan: "/images/projects/layersweep-scan-feature.png",
+  swap: "/images/projects/layersweep-swap-feature.png",
 } as const;
 
 export const caseStudies: CaseStudyContent[] = [
@@ -161,56 +157,42 @@ export const caseStudies: CaseStudyContent[] = [
         ),
       },
       {
-        title: "Approach",
+        title: "From Prototype to Product",
         layout: "blocks-with-media",
         blockMediaGap: "large",
         content: null,
         blocks: [
           {
-            subHeader: "Validating the Hypothesis (Days 1\u20132)",
-            content: (
-              <>
-                <p>I broke the project into three parts.</p>
-                <p>
-                  First, I checked whether the Figma Plugin API could support
-                  the core workflow. I built a small prototype to confirm that
-                  I could scan layers, read style bindings, and replace styles
-                  reliably.
-                </p>
-              </>
-            ),
-            imageUrl: layersweepMedia.prototype,
-            imageAlt: "Early LayerSweep prototype screenshot",
-            mediaLayout: "canvas",
-            desktopFrame: { width: 416, height: 423, left: 272, top: 88 },
-            mobileFrame: { width: 180, height: 183, left: 89, top: 20 },
-          },
-          {
-            subHeader: "Working Version (Week 1)",
+            subHeader: "Early Version",
             content: (
               <p>
-                Second, I built the working version around the actual migration
-                task. The first goal was simple: make the plugin useful enough
-                to get the job done. That meant scanning files, selecting
-                styles, assigning replacements, and applying changes in bulk.
+                I started by validating whether the idea was technically
+                feasible. I explored the Figma Plugin API, checked if I could
+                scan layers, read style bindings, and replace styles
+                reliably. Once the core mechanics worked, I built a rough
+                prototype around our actual migration task to test it on a
+                real file.
               </p>
             ),
+            imageUrl: layersweepMedia.before,
+            imageAlt: "Early version of LayerSweep",
+            mediaLayout: "full",
           },
           {
-            subHeader: "UX/UI Polish (Week 2)",
+            subHeader: "Final Version",
             content: (
               <p>
-                Third, I cleaned up the experience so other people could use it
-                without explanation. Once the core logic worked, I focused on
-                onboarding, clearer states, safer review steps, and a UI that
-                felt at home inside Figma.
+                After the prototype proved useful, I refined the experience
+                for other designers on the team. I improved onboarding,
+                added clearer states and safer review steps, and polished
+                the UI to feel at home inside Figma. This version was used
+                internally for the migration and later published on Figma
+                Community.
               </p>
             ),
-            imageUrl: layersweepMedia.polish,
-            imageAlt: "LayerSweep polished interface screenshot",
-            mediaLayout: "canvas",
-            desktopFrame: { width: 319, height: 404, left: 320, top: 98 },
-            mobileFrame: { width: 149, height: 188, left: 104, top: 18 },
+            imageUrl: layersweepMedia.after,
+            imageAlt: "Final version of LayerSweep",
+            mediaLayout: "full",
           },
         ],
       },
