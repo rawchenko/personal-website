@@ -60,7 +60,7 @@ export function Nav() {
       </a>
 
       <a
-        href="https://twitter.com/rawchenko"
+        href="https://x.com/rawchenko"
         target="_blank"
         rel="noopener noreferrer"
         className={cn(navItemClass, "text-[#999] hover:text-black flex items-center")}

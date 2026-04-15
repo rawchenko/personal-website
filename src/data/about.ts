@@ -62,7 +62,7 @@ export const experience: ExperienceItem[] = [
     period: "Dec 2022 — Jun 2023",
     location: "Remote, Cyprus",
     logo: asset("/images/companies/mycrew.png"),
-    link: "https://mycrew.com",
+    link: "https://mycrew.net/",
   },
   {
     company: "Upside Analytics",

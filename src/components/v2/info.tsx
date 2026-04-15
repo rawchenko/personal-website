@@ -94,7 +94,7 @@ export function Info() {
             }
           />
           <CTAButton
-            href="#"
+            href="https://docs.google.com/document/d/1e028y3jY3wAc1LWdrv24PRmaAWk9fMY9rqv_BH9KHM4/edit?usp=sharing"
             variant="secondary"
             label="Open Resume"
             icon={
