@@ -27,7 +27,7 @@ export function ExperienceCard() {
       style={{ containerType: "inline-size", borderRadius: 0 }}
     >
       <p
-        className="font-medium text-[#8A8A8A]"
+        className="font-medium text-text-muted"
         style={{
           fontSize: "4.48cqi",
           lineHeight: "5.38cqi",
@@ -37,7 +37,7 @@ export function ExperienceCard() {
         Work Experience
       </p>
       <div
-        className="flex flex-col flex-1 bg-white shadow-[0_2px_12px_#0000000A] overflow-hidden"
+        className="flex flex-col flex-1 bg-white shadow-xs overflow-hidden"
         style={{
           borderTopLeftRadius: "6.5cqi",
           borderTopRightRadius: "6.5cqi",
@@ -69,9 +69,9 @@ export function ExperienceCard() {
               onTapCancel={() => setActiveIndex(null)}
               className={`flex items-center cursor-pointer transition-colors duration-150 ${
                 isActive
-                  ? "bg-[#E3EBFF] border-2 border-[#79A0FF]"
+                  ? "bg-accent-bg border-2 border-accent-border"
                   : isHovered
-                    ? "bg-[#F3F3F3]"
+                    ? "bg-hover-row"
                     : ""
               }`}
               style={{
@@ -100,13 +100,13 @@ export function ExperienceCard() {
               )}
               <div className="flex flex-col flex-1 min-w-0" style={{ gap: "0.4cqi" }}>
                 <span
-                  className="text-black font-medium tracking-[-0.02em]"
+                  className="text-black font-medium tracking-snug"
                   style={{ fontSize: "5.4cqi", lineHeight: "6.7cqi" }}
                 >
                   {exp.company}
                 </span>
                 <span
-                  className="text-[#8A8A8A] font-medium tracking-[-0.02em]"
+                  className="text-text-muted font-medium tracking-snug"
                   style={{ fontSize: "4cqi", lineHeight: "5cqi" }}
                 >
                   {exp.role}
@@ -114,7 +114,7 @@ export function ExperienceCard() {
               </div>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                fill={isActive ? "#6EA1FF" : "#8A8A8A"}
+                fill={isActive ? "var(--color-accent-icon)" : "var(--color-text-muted)"}
                 viewBox="0 0 256 256"
                 className={`shrink-0 -rotate-90 transition-opacity duration-150 ${
                   isActive || isHovered ? "opacity-100" : "opacity-0"

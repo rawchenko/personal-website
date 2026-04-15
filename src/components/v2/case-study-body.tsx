@@ -12,6 +12,8 @@ import {
   type CaseStudySection,
 } from "@/data/case-studies";
 import { ZigzagDivider } from "./zigzag-divider";
+import { Button } from "./button";
+import { Heading } from "./heading";
 
 interface CaseStudyBodyProps {
   slug: string;
@@ -21,7 +23,7 @@ interface CaseStudyBodyProps {
 }
 
 const richTextClass =
-  "text-base leading-6 tracking-[-0.03em] text-[#343434] [&_p]:m-0 [&_p]:text-base [&_p]:leading-6 [&_p]:tracking-[-0.03em] [&_p]:text-[#343434] [&_strong]:font-semibold [&_.font-semibold]:font-semibold [&_code]:rounded [&_code]:bg-neutral-100 [&_code]:px-1 [&_code]:py-0.5 [&_code]:text-sm";
+  "text-body text-text-primary [&_p]:m-0 [&_p]:text-body [&_p]:text-text-primary [&_strong]:font-semibold [&_.font-semibold]:font-semibold [&_code]:rounded [&_code]:bg-neutral-100 [&_code]:px-1 [&_code]:py-0.5 [&_code]:text-sm";
 
 function BackArrowIcon() {
   return (
@@ -71,7 +73,7 @@ function BackButton({
   onClose?: () => void;
 }) {
   const className =
-    "inline-flex h-10 items-center gap-2 rounded-full bg-[#E8E8E8] pl-4 pr-5 text-base text-black shadow-[0_0_0_2px_rgba(255,255,255,0.1)] backdrop-blur-[4px] transition-colors duration-200 hover:bg-[#dddddd]";
+    "inline-flex h-10 items-center gap-2 rounded-full bg-button-back pl-4 pr-5 text-base text-black shadow-[0_0_0_2px_rgba(255,255,255,0.1)] backdrop-blur-[4px] transition-colors duration-200 hover:bg-button-back-hover";
 
   if (variant === "overlay") {
     return (
@@ -90,25 +92,9 @@ function BackButton({
   );
 }
 
-function SectionHeading({ children }: { children: ReactNode }) {
-  return (
-    <h2 className="text-[20px] font-semibold leading-7 tracking-[-0.02em] text-[#343434]">
-      {children}
-    </h2>
-  );
-}
-
-function BlockHeading({ children }: { children: ReactNode }) {
-  return (
-    <h3 className="text-base font-semibold leading-6 tracking-[-0.03em] text-[#343434]">
-      {children}
-    </h3>
-  );
-}
-
 function ImagePlaceholder({ label }: { label: string }) {
   return (
-    <div className="flex h-[223px] w-full items-center justify-center border border-[#EEEEEE] bg-[#FBFBFB] px-6 text-center text-sm text-neutral-400 tablet:h-[600px]">
+    <div className="flex h-[223px] w-full items-center justify-center border border-[#EEEEEE] bg-surface-inset px-6 text-center text-sm text-neutral-400 tablet:h-[600px]">
       <span>{label}</span>
     </div>
   );
@@ -168,7 +154,7 @@ function VideoPlayer({ src }: { src: string }) {
     timelineMax > 0 ? `${(Math.min(currentTime, timelineMax) / timelineMax) * 100}%` : "0%";
 
   return (
-    <div className="group relative w-full overflow-hidden bg-[#FBFBFB]">
+    <div className="group relative w-full overflow-hidden bg-surface-inset">
       <video
         ref={videoRef}
         src={src}
@@ -190,7 +176,7 @@ function VideoPlayer({ src }: { src: string }) {
         onTimeUpdate={(event) => {
           setCurrentTime(event.currentTarget.currentTime);
         }}
-        className="block w-full bg-[#FBFBFB]"
+        className="block w-full bg-surface-inset"
         onClick={togglePlayback}
       />
       <div
@@ -319,11 +305,11 @@ function CanvasImage({
   mobileFrame: CaseStudyMediaFrame;
 }) {
   return (
-    <div className="relative h-[224px] w-full shrink-0 bg-[#FBFBFB] tablet:h-[600px]">
+    <div className="relative h-[224px] w-full shrink-0 bg-surface-inset tablet:h-[600px]">
       <img
         src={src}
         alt={alt}
-        className="absolute rounded-[4px] border border-[#E6E6E6] object-cover tablet:hidden"
+        className="absolute rounded border border-border-image object-cover tablet:hidden"
         style={{
           width: `${mobileFrame.width}px`,
           height: `${mobileFrame.height}px`,
@@ -335,7 +321,7 @@ function CanvasImage({
         src={src}
         alt=""
         aria-hidden="true"
-        className="absolute hidden rounded-[4px] border border-[#E6E6E6] object-cover tablet:block"
+        className="absolute hidden rounded border border-border-image object-cover tablet:block"
         style={{
           width: `${desktopFrame.width}px`,
           height: `${desktopFrame.height}px`,
@@ -415,7 +401,7 @@ function SectionContent({ section }: { section: CaseStudySection }) {
   if (section.layout === "blocks-with-media") {
     return (
       <div className="flex flex-col gap-5">
-        {section.title ? <SectionHeading>{section.title}</SectionHeading> : null}
+        {section.title ? <Heading level={2}>{section.title}</Heading> : null}
         {section.blocks?.map((block) => {
           const hasMedia = block.videoUrl || block.imagePlaceholder;
           const blockGap =
@@ -424,7 +410,7 @@ function SectionContent({ section }: { section: CaseStudySection }) {
           return (
             <div key={block.subHeader} className={`flex flex-col ${blockGap}`}>
               <div className="flex max-w-[600px] flex-col gap-3">
-                <BlockHeading>{block.subHeader}</BlockHeading>
+                <Heading level={3}>{block.subHeader}</Heading>
                 <div className={`flex flex-col gap-3 ${richTextClass}`}>
                   {block.content}
                 </div>
@@ -440,7 +426,7 @@ function SectionContent({ section }: { section: CaseStudySection }) {
   if (section.layout === "narrow") {
     return (
       <div className="flex max-w-[600px] flex-col gap-5">
-        {section.title ? <SectionHeading>{section.title}</SectionHeading> : null}
+        {section.title ? <Heading level={2}>{section.title}</Heading> : null}
         <div className={`flex flex-col gap-5 ${richTextClass}`}>{section.content}</div>
       </div>
     );
@@ -448,7 +434,7 @@ function SectionContent({ section }: { section: CaseStudySection }) {
 
   return (
     <div className="flex flex-col gap-5">
-      {section.title ? <SectionHeading>{section.title}</SectionHeading> : null}
+      {section.title ? <Heading level={2}>{section.title}</Heading> : null}
       <div className={`flex max-w-[600px] flex-col gap-3 ${richTextClass}`}>
         {section.content}
       </div>
@@ -470,7 +456,7 @@ export function CaseStudyBody({
   const sections = content.sections ?? [];
 
   return (
-    <div className="min-h-screen bg-[#F5F5F5]">
+    <div className="min-h-screen bg-surface-page">
       <div className="mx-auto flex w-full flex-col items-start tablet:max-w-[992px]">
         <div className="w-full px-4 py-4 tablet:py-6">
           <BackButton variant={variant} onClose={onClose} />
@@ -478,22 +464,21 @@ export function CaseStudyBody({
 
         <main className="flex w-full flex-col gap-6 bg-white px-4 pb-7 pt-4">
           <section className="flex flex-col gap-3">
-            <h1 className="text-[24px] font-semibold leading-8 tracking-[-0.02em] text-[#343434]">
+            <h1 className="text-heading-1 font-semibold text-text-primary">
               {project.title}
             </h1>
-            <p className="text-base leading-6 tracking-[-0.03em] text-[#343434]">
+            <p className="text-body text-text-primary">
               {project.description}
             </p>
             {content.ctaUrl && content.ctaLabel ? (
-              <a
+              <Button
                 href={content.ctaUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex h-12 w-full items-center justify-center gap-2 rounded-xl bg-[#343434] px-6 text-sm font-medium text-white transition-colors duration-200 hover:bg-[#454545] tablet:w-fit"
-              >
-                <ExternalLinkIcon />
-                <span>{content.ctaLabel}</span>
-              </a>
+                external
+                variant="primary"
+                label={content.ctaLabel}
+                icon={<ExternalLinkIcon />}
+                className="w-full tablet:w-fit px-6"
+              />
             ) : null}
           </section>
 
@@ -505,8 +490,8 @@ export function CaseStudyBody({
           ))}
         </main>
 
-        <footer className="flex w-full flex-col gap-2 px-4 py-4 text-sm leading-[22px] text-[rgba(52,52,52,0.7)] tablet:flex-row">
-          <p className="tablet:flex-1">© 2026 - Eugene Kravchenko</p>
+        <footer className="flex w-full flex-col gap-2 px-4 py-4 text-sm leading-[22px] text-text-primary/70 tablet:flex-row">
+          <p className="tablet:flex-1">&copy; 2026 - Eugene Kravchenko</p>
           <p className="tablet:flex-1 tablet:text-right">
             vibecoded and vibedesigned
           </p>
