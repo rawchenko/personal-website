@@ -1,5 +1,10 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* ───────────────────────────────────────────
+   Static tokens — not themed
+   ─────────────────────────────────────────── */
 @theme {
   --breakpoint-tablet: 640px;
   --breakpoint-desktop: 960px;
@@ -8,6 +13,7 @@
     BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial,
     "Noto Sans", sans-serif;
 
+  /* Reference neutral palette (static) */
   --color-neutral-50: #fafafa;
   --color-neutral-100: #f5f5f5;
   --color-neutral-200: #e5e5e5;
@@ -19,42 +25,8 @@
   --color-neutral-800: #262626;
   --color-neutral-900: #171717;
   --color-neutral-950: #0a0a0a;
-  --color-card-dark: #080808;
 
-  /* --- Semantic text colors --- */
-  --color-text-primary: #343434;
-  --color-text-muted: #8A8A8A;
-  --color-text-disabled: #CDCDCD;
-  --color-text-nav-inactive: #999999;
-
-  /* --- Surfaces --- */
-  --color-surface-subtle: #F1F1F1;
-  --color-surface-page: #F5F5F5;
-  --color-surface-inset: #FBFBFB;
-
-  /* --- Accent (blue) --- */
-  --color-accent-bg: #E3EBFF;
-  --color-accent-border: #79A0FF;
-  --color-accent-icon: #6EA1FF;
-
-  /* --- Borders --- */
-  --color-border-subtle: #DEDEDE;
-  --color-border-image: #E6E6E6;
-
-  /* --- Buttons — primary --- */
-  --color-button-primary: #343434;
-  --color-button-primary-hover: #1a1a1a;
-  --color-button-primary-active: #111111;
-  /* --- Buttons — secondary --- */
-  --color-button-secondary: rgba(0, 0, 0, 0.04);
-  --color-button-secondary-hover: rgba(0, 0, 0, 0.08);
-  --color-button-secondary-active: rgba(0, 0, 0, 0.12);
-  /* --- Buttons — back --- */
-  --color-button-back: #E8E8E8;
-  --color-button-back-hover: #dddddd;
-  --color-hover-row: #F3F3F3;
-
-  /* --- Typography scale --- */
+  /* Typography scale */
   --text-display: 28px;
   --text-display--line-height: 34px;
   --text-display--letter-spacing: -0.06em;
@@ -77,14 +49,211 @@
 
   --tracking-snug: -0.02em;
   --tracking-body: -0.03em;
-
-  /* --- Shadow elevation scale --- */
-  --shadow-xs: 0 2px 12px #0000000A;
-  --shadow-sm: 0 1px 2px #0000001F, 0 4px 4px #0000001A, 0 9px 5px #0000000D, 0 15px 6px #00000005;
-  --shadow-md: 0px 30px 12px #0000000A, 0px 18px 10px #0000001A, 0px 8px 8px #00000033, 0px 2px 4px #00000040;
-  --shadow-lg: 0px 40px 20px #0000000A, 0px 24px 14px #0000001A, 0px 12px 12px #00000040, 0px 4px 6px #00000066;
 }
 
+/* ───────────────────────────────────────────
+   Runtime variables — light (default)
+   ─────────────────────────────────────────── */
+:root {
+  /* Text */
+  --rt-text-primary: #343434;
+  --rt-text-heading: #000000;
+  --rt-text-muted: #8A8A8A;
+  --rt-text-disabled: #CDCDCD;
+  --rt-text-nav-inactive: #999999;
+
+  /* Surfaces */
+  --rt-surface-page: #F5F5F5;
+  --rt-surface-subtle: #F1F1F1;
+  --rt-surface-inset: #FBFBFB;
+  --rt-surface-primary: #FFFFFF;
+  --rt-surface-elevated: #FFFFFF;
+
+  /* Accent (blue) */
+  --rt-accent-bg: #E3EBFF;
+  --rt-accent-border: #79A0FF;
+  --rt-accent-icon: #6EA1FF;
+
+  /* Borders */
+  --rt-border-subtle: #DEDEDE;
+  --rt-border-image: #E6E6E6;
+  --rt-border-card: rgba(0, 0, 0, 0.06);
+
+  /* Buttons — primary */
+  --rt-button-primary: #343434;
+  --rt-button-primary-hover: #1a1a1a;
+  --rt-button-primary-active: #111111;
+  --rt-button-primary-text: #FFFFFF;
+  /* Buttons — secondary */
+  --rt-button-secondary: rgba(0, 0, 0, 0.04);
+  --rt-button-secondary-hover: rgba(0, 0, 0, 0.08);
+  --rt-button-secondary-active: rgba(0, 0, 0, 0.12);
+  /* Buttons — back */
+  --rt-button-back: #E8E8E8;
+  --rt-button-back-hover: #dddddd;
+  --rt-hover-row: #F3F3F3;
+
+  /* Misc */
+  --rt-card-dark: #080808;
+  --rt-icon-muted: #B4B4B4;
+  --rt-badge-bg: #F1F1F1;
+  --rt-badge-text: #626262;
+  --rt-divider: #DFDFDF;
+  --rt-code-bg: #F5F5F5;
+
+  /* Shadows */
+  --rt-shadow-xs: 0 2px 12px #0000000A;
+  --rt-shadow-sm: 0 1px 2px #0000001F, 0 4px 4px #0000001A, 0 9px 5px #0000000D, 0 15px 6px #00000005;
+  --rt-shadow-md: 0px 30px 12px #0000000A, 0px 18px 10px #0000001A, 0px 8px 8px #00000033, 0px 2px 4px #00000040;
+  --rt-shadow-lg: 0px 40px 20px #0000000A, 0px 24px 14px #0000001A, 0px 12px 12px #00000040, 0px 4px 6px #00000066;
+  --rt-shadow-card: 0 2px 8px rgba(0, 0, 0, 0.04), 0 8px 32px rgba(0, 0, 0, 0.08);
+}
+
+/* ───────────────────────────────────────────
+   Runtime variables — dark overrides
+   ─────────────────────────────────────────── */
+.dark {
+  /* Text */
+  --rt-text-primary: #E0E0E0;
+  --rt-text-heading: #F0F0F0;
+  --rt-text-muted: #9E9E9E;
+  --rt-text-disabled: #444444;
+  --rt-text-nav-inactive: #777777;
+
+  /* Surfaces */
+  --rt-surface-page: #0F0F0F;
+  --rt-surface-subtle: #1E1E1E;
+  --rt-surface-inset: #181818;
+  --rt-surface-primary: #141414;
+  --rt-surface-elevated: #1A1A1A;
+
+  /* Accent (blue) */
+  --rt-accent-bg: #1A2744;
+  --rt-accent-border: #5580DD;
+  --rt-accent-icon: #5580DD;
+
+  /* Borders */
+  --rt-border-subtle: #2A2A2A;
+  --rt-border-image: #2A2A2A;
+  --rt-border-card: rgba(255, 255, 255, 0.08);
+
+  /* Buttons — primary */
+  --rt-button-primary: #E8E8E8;
+  --rt-button-primary-hover: #F0F0F0;
+  --rt-button-primary-active: #FFFFFF;
+  --rt-button-primary-text: #111111;
+  /* Buttons — secondary */
+  --rt-button-secondary: rgba(255, 255, 255, 0.06);
+  --rt-button-secondary-hover: rgba(255, 255, 255, 0.10);
+  --rt-button-secondary-active: rgba(255, 255, 255, 0.14);
+  /* Buttons — back */
+  --rt-button-back: #2A2A2A;
+  --rt-button-back-hover: #333333;
+  --rt-hover-row: #1E1E1E;
+
+  /* Misc */
+  --rt-card-dark: #080808;
+  --rt-icon-muted: #666666;
+  --rt-badge-bg: #2A2A2A;
+  --rt-badge-text: #999999;
+  --rt-divider: #333333;
+  --rt-code-bg: #1E1E1E;
+
+  /* Shadows — increased opacity for dark backgrounds */
+  --rt-shadow-xs: 0 2px 12px #00000020;
+  --rt-shadow-sm: 0 1px 2px #0000003F, 0 4px 4px #00000034, 0 9px 5px #0000001A, 0 15px 6px #0000000A;
+  --rt-shadow-md: 0px 30px 12px #00000014, 0px 18px 10px #00000034, 0px 8px 8px #00000066, 0px 2px 4px #00000080;
+  --rt-shadow-lg: 0px 40px 20px #00000014, 0px 24px 14px #00000034, 0px 12px 12px #00000080, 0px 4px 6px #000000CC;
+  --rt-shadow-card: 0 2px 8px rgba(0, 0, 0, 0.12), 0 8px 32px rgba(0, 0, 0, 0.20);
+}
+
+/* ───────────────────────────────────────────
+   Tailwind aliases — reconnect utilities
+   ─────────────────────────────────────────── */
+@theme inline {
+  /* Text */
+  --color-text-primary: var(--rt-text-primary);
+  --color-text-heading: var(--rt-text-heading);
+  --color-text-muted: var(--rt-text-muted);
+  --color-text-disabled: var(--rt-text-disabled);
+  --color-text-nav-inactive: var(--rt-text-nav-inactive);
+
+  /* Surfaces */
+  --color-surface-page: var(--rt-surface-page);
+  --color-surface-subtle: var(--rt-surface-subtle);
+  --color-surface-inset: var(--rt-surface-inset);
+  --color-surface-primary: var(--rt-surface-primary);
+  --color-surface-elevated: var(--rt-surface-elevated);
+
+  /* Accent */
+  --color-accent-bg: var(--rt-accent-bg);
+  --color-accent-border: var(--rt-accent-border);
+  --color-accent-icon: var(--rt-accent-icon);
+
+  /* Borders */
+  --color-border-subtle: var(--rt-border-subtle);
+  --color-border-image: var(--rt-border-image);
+  --color-border-card: var(--rt-border-card);
+
+  /* Buttons — primary */
+  --color-button-primary: var(--rt-button-primary);
+  --color-button-primary-hover: var(--rt-button-primary-hover);
+  --color-button-primary-active: var(--rt-button-primary-active);
+  --color-button-primary-text: var(--rt-button-primary-text);
+  /* Buttons — secondary */
+  --color-button-secondary: var(--rt-button-secondary);
+  --color-button-secondary-hover: var(--rt-button-secondary-hover);
+  --color-button-secondary-active: var(--rt-button-secondary-active);
+  /* Buttons — back */
+  --color-button-back: var(--rt-button-back);
+  --color-button-back-hover: var(--rt-button-back-hover);
+  --color-hover-row: var(--rt-hover-row);
+
+  /* Misc */
+  --color-card-dark: var(--rt-card-dark);
+  --color-icon-muted: var(--rt-icon-muted);
+  --color-badge-bg: var(--rt-badge-bg);
+  --color-badge-text: var(--rt-badge-text);
+  --color-divider: var(--rt-divider);
+  --color-code-bg: var(--rt-code-bg);
+
+  /* Shadows */
+  --shadow-xs: var(--rt-shadow-xs);
+  --shadow-sm: var(--rt-shadow-sm);
+  --shadow-md: var(--rt-shadow-md);
+  --shadow-lg: var(--rt-shadow-lg);
+  --shadow-card: var(--rt-shadow-card);
+}
+
+/* ───────────────────────────────────────────
+   View Transition — circular reveal
+   ─────────────────────────────────────────── */
+html {
+  view-transition-name: root;
+}
+
+::view-transition-new(root) {
+  animation: 0.6s ease-in-out reveal-circle;
+  mix-blend-mode: normal;
+}
+
+::view-transition-old(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+
+@keyframes reveal-circle {
+  from {
+    clip-path: circle(2px at var(--vt-x) var(--vt-y));
+  }
+  to {
+    clip-path: circle(var(--vt-radius) at var(--vt-x) var(--vt-y));
+  }
+}
+
+/* ───────────────────────────────────────────
+   Global styles
+   ─────────────────────────────────────────── */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0.01ms !important;
@@ -95,15 +264,15 @@
 
 body {
   font-family: var(--font-sans);
-  color: var(--color-neutral-900);
-  background-color: white;
+  color: var(--color-text-primary);
+  background-color: var(--color-surface-page);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 ::selection {
-  background-color: var(--color-neutral-900);
-  color: white;
+  background-color: var(--color-text-heading);
+  color: var(--color-surface-primary);
 }
 
 :focus-visible {
