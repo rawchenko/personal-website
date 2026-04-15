@@ -454,6 +454,9 @@ export function CaseStudyBody({
   if (!project || !content) return null;
 
   const sections = content.sections ?? [];
+  // TODO: Remove draft check once casino-brand content is complete
+  const isDraft = content.status === "draft";
+  const visibleSections = isDraft ? sections.slice(0, 1) : sections;
 
   return (
     <div className="min-h-screen bg-surface-page">
@@ -482,12 +485,21 @@ export function CaseStudyBody({
             ) : null}
           </section>
 
-          {sections.map((section, index) => (
+          {visibleSections.map((section, index) => (
             <div key={section.title || `section-${index}`} className="flex flex-col gap-6">
               <ZigzagDivider />
               <SectionContent section={section} />
             </div>
           ))}
+
+          {isDraft ? (
+            <div className="flex flex-col gap-6">
+              <ZigzagDivider />
+              <p className="py-8 text-center text-body text-text-primary/50">
+                This case study is being prepared.
+              </p>
+            </div>
+          ) : null}
         </main>
 
         <footer className="flex w-full flex-col gap-2 px-4 py-4 text-sm leading-[22px] text-text-primary/70 tablet:flex-row">
