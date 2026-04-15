@@ -535,22 +535,45 @@ export const caseStudies: CaseStudyContent[] = [
     slug: "brainrocket-showcase",
     sections: [
       {
-        title: "Overview",
+        title: "",
+        layout: "two-column",
         content: (
           <>
-            <p>
-              A selection of projects from my time at Brainrocket &mdash; an
-              iGaming company running 10+ casino and sportsbook brands on a
-              shared platform. My role evolved from executing UI tasks on
-              individual brands to owning design concepts and coordinating
-              design teams.
-            </p>
-            <p>
-              <strong>Role:</strong> Product Designer &rarr; Senior Product
-              Designer &middot; <strong>Industry:</strong> iGaming &middot;{" "}
-              <strong>Period:</strong> 2022&ndash;2025
-            </p>
+            <div className="flex flex-col gap-3">
+              <p className="font-semibold">The Context</p>
+              <p>
+                An iGaming company behind multiple casino and sportsbook brands
+                running on a shared platform. Each brand had its own visual
+                identity, but all shared the same tech stack, design system, and
+                core feature set.
+              </p>
+            </div>
+            <div className="flex flex-col gap-3">
+              <p className="font-semibold">My Role</p>
+              <p>Product Designer &rarr; Senior Product Designer</p>
+            </div>
+            <div className="flex flex-col gap-3">
+              <p className="font-semibold">Industry</p>
+              <p>iGaming</p>
+            </div>
+            <div className="flex flex-col gap-3">
+              <p className="font-semibold">Period</p>
+              <p>2022&ndash;2025</p>
+            </div>
           </>
+        ),
+        rightColumn: (
+          <div className="flex flex-col gap-3">
+            <p className="font-semibold">What This Covers</p>
+            <p>
+              A selection of projects I worked on before moving to the platform
+              team &mdash; from early UI execution on individual brands to
+              owning design concepts, coordinating design teams, and shipping
+              full products under tight deadlines. The showcase covers seven
+              brands, each with a distinct visual identity but built on the
+              same platform foundation.
+            </p>
+          </div>
         ),
       },
       {
