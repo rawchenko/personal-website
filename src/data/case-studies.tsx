@@ -41,6 +41,8 @@ export interface CaseStudySection {
 
 export interface CaseStudyContent {
   slug: string;
+  /** "draft" hides detailed sections and shows a "coming soon" message */
+  status?: "draft" | "published";
   /** Optional CTA button shown in the header */
   ctaUrl?: string;
   ctaLabel?: string;
@@ -344,39 +346,51 @@ export const caseStudies: CaseStudyContent[] = [
       },
     ],
   },
+  // TODO: Content not ready — add real images/videos for sections below and set status to "published"
   {
     slug: "casino-brand",
+    status: "draft",
     sections: [
       {
-        title: "Overview",
+        title: "",
+        layout: "two-column",
         content: (
           <>
+            <div className="flex flex-col gap-3">
+              <p className="font-semibold">The Challenge</p>
+              <p>
+                An internal experiment showed that short-form video content
+                significantly boosted engagement in a casino context. The task
+                was to build an entire brand and product around that
+                insight &mdash; making the swipe-to-play format the core of the
+                experience, not just a feature bolted onto a traditional lobby.
+              </p>
+            </div>
+            <div className="flex flex-col gap-3">
+              <p className="font-semibold">My Role</p>
+              <p>Senior Product Designer</p>
+            </div>
+            <div className="flex flex-col gap-3">
+              <p className="font-semibold">Platform</p>
+              <p>Web, Android, iOS</p>
+            </div>
+          </>
+        ),
+        rightColumn: (
+          <div className="flex flex-col gap-3">
+            <p className="font-semibold">Project Overview</p>
             <p>
               Swiper is a casino product where the core experience is a
               TikTok-style vertical feed. Users swipe through short-form
-              content &mdash; a mix of playable casino games, entertainment
-              videos, and promotions &mdash; in a single continuous stream. The
-              Shorts tab serves as the main entry point: users discover games by
-              swiping, not by browsing a traditional lobby.
+              content &mdash; playable casino games, entertainment videos, and
+              promotions &mdash; in a single continuous stream. I worked on
+              Swiper from concept to handoff alongside another product designer,
+              an art team, and developers. The project took around 2
+              months &mdash; covering both web and mobile design, including
+              stakeholder approvals. Swiper was shipped on web, Android, and iOS
+              simultaneously for the Danish and Swedish markets.
             </p>
-            <p>
-              The idea came from an internal experiment that showed short-form
-              video content significantly boosted engagement metrics in a casino
-              context. The challenge was to take that insight and build an entire
-              brand and product around it &mdash; not just bolt a feed onto an
-              existing casino, but make the swipe-to-play format the core of the
-              experience.
-            </p>
-            <p>
-              I worked on Swiper from concept to handoff alongside another
-              product designer, an art team, and developers, collaborating
-              closely with a product manager. The project took around 2
-              months &mdash; from initial concept to handoff &mdash; covering
-              both web and mobile design, including stakeholder approvals along
-              the way. Swiper was a B2C brand, shipped on web, Android, and iOS
-              simultaneously.
-            </p>
-          </>
+          </div>
         ),
       },
       {
