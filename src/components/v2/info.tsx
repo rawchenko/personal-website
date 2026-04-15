@@ -58,7 +58,8 @@ export function Info() {
             }
           />
           <Button
-            href="#"
+            href="https://docs.google.com/document/d/1e028y3jY3wAc1LWdrv24PRmaAWk9fMY9rqv_BH9KHM4/edit?usp=sharing"
+            external
             variant="secondary"
             label="Open Resume"
             className="tablet:flex-1"

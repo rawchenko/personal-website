@@ -45,7 +45,7 @@ export function Nav() {
       </ExternalLink>
 
       <ExternalLink
-        href="https://twitter.com/rawchenko"
+        href="https://x.com/rawchenko"
         className={cn(navItemClass, "text-text-nav-inactive hover:text-black")}
       >
         twitter
