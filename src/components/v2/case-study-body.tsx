@@ -288,7 +288,7 @@ function FullImage({ src, alt }: { src: string; alt: string }) {
     <img
       src={src}
       alt={alt}
-      className="block h-[223px] w-full object-cover tablet:h-[600px]"
+      className="block w-full"
     />
   );
 }
