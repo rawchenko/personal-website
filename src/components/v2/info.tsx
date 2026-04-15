@@ -11,7 +11,7 @@ const accent = "text-text-primary";
 export function Info() {
   return (
     <div
-      className="flex flex-col gap-6 px-4 py-6"
+      className="flex flex-col gap-6 px-5 py-6 tablet:px-8"
       style={{ containerType: "inline-size" }}
     >
       <AnimateIn>

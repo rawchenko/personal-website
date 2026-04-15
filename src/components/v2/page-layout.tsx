@@ -13,7 +13,7 @@ export function PageLayout({ info, portfolio }: PageLayoutProps) {
       </aside>
 
       {/* Portfolio content */}
-      <div className="min-w-0 overflow-hidden px-4 pt-2 pb-4">
+      <div className="min-w-0 overflow-hidden px-5 pt-2 pb-4 tablet:px-8">
         {portfolio}
       </div>
     </div>

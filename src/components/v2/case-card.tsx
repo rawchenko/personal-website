@@ -92,7 +92,7 @@ export function CaseCard({
     <Card href={`/work/${project.slug}`}>
       <div
         ref={cardRef}
-        className="relative w-full aspect-[960/600] overflow-hidden"
+        className="relative w-full aspect-[960/600] overflow-hidden rounded-3xl border border-black/[0.06] shadow-[0_2px_8px_rgba(0,0,0,0.04),0_8px_32px_rgba(0,0,0,0.08)]"
         style={{ background: background || "var(--color-card-dark)" }}
       >
         {effectiveShaderConfig && <ShaderRenderer config={effectiveShaderConfig} inView={inView} />}
