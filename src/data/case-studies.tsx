@@ -117,7 +117,7 @@ export const caseStudies: CaseStudyContent[] = [
           <div className="flex flex-col gap-3">
             <div className="flex flex-col gap-3">
               <div className="flex items-start gap-2">
-                <span className="w-7 h-6 rounded-full border border-[#DEDEDE] flex items-center justify-center text-base font-semibold shrink-0">
+                <span className="w-7 h-6 rounded-full border border-border-subtle flex items-center justify-center text-base font-semibold shrink-0">
                   1
                 </span>
                 <span className="font-semibold leading-[24px]">
@@ -131,7 +131,7 @@ export const caseStudies: CaseStudyContent[] = [
             </div>
             <div className="flex flex-col gap-3">
               <div className="flex items-start gap-2">
-                <span className="w-7 h-6 rounded-full border border-[#DEDEDE] flex items-center justify-center text-base font-semibold shrink-0">
+                <span className="w-7 h-6 rounded-full border border-border-subtle flex items-center justify-center text-base font-semibold shrink-0">
                   2
                 </span>
                 <span className="font-semibold leading-[24px]">
@@ -145,7 +145,7 @@ export const caseStudies: CaseStudyContent[] = [
             </div>
             <div className="flex flex-col gap-3">
               <div className="flex items-start gap-2">
-                <span className="w-7 h-6 rounded-full border border-[#DEDEDE] flex items-center justify-center text-base font-semibold shrink-0">
+                <span className="w-7 h-6 rounded-full border border-border-subtle flex items-center justify-center text-base font-semibold shrink-0">
                   3
                 </span>
                 <span className="font-semibold leading-[24px]">

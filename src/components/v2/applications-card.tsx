@@ -21,7 +21,7 @@ export function ApplicationsCard() {
 
   return (
     <div
-      className="w-full h-full bg-[#F1F1F1] overflow-hidden"
+      className="w-full h-full bg-surface-subtle overflow-hidden"
       style={{ containerType: "inline-size", borderRadius: 0 }}
     >
       <div
@@ -56,14 +56,14 @@ export function ApplicationsCard() {
                 />
               </svg>
               <span
-                className="text-[#ADADAD] font-medium tracking-[-0.02em]"
+                className="text-[#ADADAD] font-medium tracking-snug"
                 style={{ fontSize: "5.83cqi", lineHeight: "7.17cqi" }}
               >
                 Applications
               </span>
             </div>
             <div
-              className="w-full bg-[#DEDEDE]"
+              className="w-full bg-border-subtle"
               style={{ height: "0.45cqi" }}
             />
           </div>
@@ -86,7 +86,7 @@ export function ApplicationsCard() {
                   alt={tool.name}
                   width={110}
                   height={110}
-                  className="shadow-[0px_30px_12px_#0000000A,0px_18px_10px_#0000001A,0px_8px_8px_#00000033,0px_2px_4px_#00000040] transition-shadow duration-200 hover:shadow-[0px_40px_20px_#0000000A,0px_24px_14px_#0000001A,0px_12px_12px_#00000040,0px_4px_6px_#00000066]"
+                  className="shadow-md transition-shadow duration-200 hover:shadow-lg"
                   style={{
                     width: "24.66cqi",
                     height: "24.66cqi",
