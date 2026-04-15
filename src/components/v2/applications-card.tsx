@@ -21,8 +21,8 @@ export function ApplicationsCard() {
 
   return (
     <div
-      className="w-full h-full bg-surface-subtle overflow-hidden"
-      style={{ containerType: "inline-size", borderRadius: 0 }}
+      className="w-full h-full overflow-hidden rounded-3xl border border-black/[0.06] bg-surface-subtle shadow-[0_2px_8px_rgba(0,0,0,0.04),0_8px_32px_rgba(0,0,0,0.08)]"
+      style={{ containerType: "inline-size" }}
     >
       <div
         className="w-full h-full"

@@ -94,7 +94,7 @@ function BackButton({
 
 function ImagePlaceholder({ label }: { label: string }) {
   return (
-    <div className="flex h-[223px] w-full items-center justify-center border border-[#EEEEEE] bg-surface-inset px-6 text-center text-sm text-neutral-400 tablet:h-[600px]">
+    <div className="flex h-[223px] w-full items-center justify-center rounded-3xl border border-black/[0.06] bg-surface-inset px-6 text-center text-sm text-neutral-400 shadow-[0_2px_8px_rgba(0,0,0,0.04),0_8px_32px_rgba(0,0,0,0.08)] tablet:h-[600px]">
       <span>{label}</span>
     </div>
   );
@@ -154,7 +154,7 @@ function VideoPlayer({ src }: { src: string }) {
     timelineMax > 0 ? `${(Math.min(currentTime, timelineMax) / timelineMax) * 100}%` : "0%";
 
   return (
-    <div className="group relative w-full overflow-hidden bg-surface-inset">
+    <div className="group relative w-full overflow-hidden rounded-3xl border border-black/[0.06] bg-surface-inset shadow-[0_2px_8px_rgba(0,0,0,0.04),0_8px_32px_rgba(0,0,0,0.08)]">
       <video
         ref={videoRef}
         src={src}
@@ -288,7 +288,7 @@ function FullImage({ src, alt }: { src: string; alt: string }) {
     <img
       src={src}
       alt={alt}
-      className="block w-full"
+      className="block w-full rounded-3xl border border-black/[0.06] shadow-[0_2px_8px_rgba(0,0,0,0.04),0_8px_32px_rgba(0,0,0,0.08)]"
     />
   );
 }
@@ -403,12 +403,12 @@ function SectionContent({ section }: { section: CaseStudySection }) {
       <div className="flex flex-col gap-5">
         {section.title ? <Heading level={2}>{section.title}</Heading> : null}
         {section.blocks?.map((block) => {
-          const hasMedia = block.videoUrl || block.imagePlaceholder;
+          const hasMedia = block.videoUrl || block.imageUrl || block.imagePlaceholder;
           const blockGap =
             section.blockMediaGap === "large" && hasMedia ? "gap-6" : "gap-3";
 
           return (
-            <div key={block.subHeader} className={`flex flex-col ${blockGap}`}>
+            <div key={block.subHeader} className={`flex flex-col ${blockGap} ${hasMedia ? "pb-6" : ""}`}>
               <div className="flex max-w-[600px] flex-col gap-3">
                 <Heading level={3}>{block.subHeader}</Heading>
                 <div className={`flex flex-col gap-3 ${richTextClass}`}>
@@ -461,11 +461,11 @@ export function CaseStudyBody({
   return (
     <div className="min-h-screen bg-surface-page">
       <div className="mx-auto flex w-full flex-col items-start tablet:max-w-[992px]">
-        <div className="w-full px-4 py-4 tablet:py-6">
+        <div className="w-full px-5 py-4 tablet:px-8 tablet:py-6">
           <BackButton variant={variant} onClose={onClose} />
         </div>
 
-        <main className="flex w-full flex-col gap-6 bg-white px-4 pb-7 pt-4">
+        <main className="flex w-full flex-col gap-6 rounded-[48px] bg-white px-5 py-6 tablet:p-8">
           <section className="flex flex-col gap-3">
             <h1 className="text-heading-1 font-semibold text-text-primary">
               {project.title}
@@ -502,7 +502,7 @@ export function CaseStudyBody({
           ) : null}
         </main>
 
-        <footer className="flex w-full flex-col gap-2 px-4 py-4 text-sm leading-[22px] text-text-primary/70 tablet:flex-row">
+        <footer className="flex w-full flex-col gap-2 px-5 py-4 text-sm leading-[22px] text-text-primary/70 tablet:px-8 tablet:flex-row">
           <p className="tablet:flex-1">&copy; 2026 - Eugene Kravchenko</p>
           <p className="tablet:flex-1 tablet:text-right">
             vibecoded and vibedesigned
