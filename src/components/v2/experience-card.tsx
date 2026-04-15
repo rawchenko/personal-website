@@ -23,7 +23,7 @@ export function ExperienceCard() {
 
   return (
     <div
-      className="flex flex-col h-full overflow-hidden rounded-3xl border border-black/[0.06] bg-neutral-100 shadow-[0_2px_8px_rgba(0,0,0,0.04),0_8px_32px_rgba(0,0,0,0.08)]"
+      className="flex flex-col h-full overflow-hidden rounded-3xl border border-border-card bg-surface-subtle shadow-card"
       style={{ containerType: "inline-size" }}
     >
       <p
@@ -37,7 +37,7 @@ export function ExperienceCard() {
         Work Experience
       </p>
       <div
-        className="flex flex-col flex-1 bg-white shadow-xs overflow-hidden"
+        className="flex flex-col flex-1 bg-surface-elevated shadow-xs overflow-hidden"
         style={{
           borderTopLeftRadius: "6.5cqi",
           borderTopRightRadius: "6.5cqi",
@@ -88,7 +88,7 @@ export function ExperienceCard() {
                   height={64}
                   className={`shrink-0 ${
                     exp.company === "Upside Analytics"
-                      ? "border border-black/[0.13]"
+                      ? "border border-border-card"
                       : ""
                   }`}
                   style={{
@@ -100,7 +100,7 @@ export function ExperienceCard() {
               )}
               <div className="flex flex-col flex-1 min-w-0" style={{ gap: "0.4cqi" }}>
                 <span
-                  className="text-black font-medium tracking-snug"
+                  className="text-text-heading font-medium tracking-snug"
                   style={{ fontSize: "5.4cqi", lineHeight: "6.7cqi" }}
                 >
                   {exp.company}

@@ -26,7 +26,7 @@ const base =
   "inline-flex items-center justify-center gap-1.5 h-12 rounded-xl text-label font-semibold transition-all duration-150 active:scale-[0.97]";
 
 const variants = {
-  primary: `${base} bg-button-primary text-white hover:bg-button-primary-hover active:bg-button-primary-active`,
+  primary: `${base} bg-button-primary text-button-primary-text hover:bg-button-primary-hover active:bg-button-primary-active`,
   secondary: `${base} bg-button-secondary text-text-primary hover:bg-button-secondary-hover active:bg-button-secondary-active`,
 };
 

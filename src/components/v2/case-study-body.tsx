@@ -23,7 +23,7 @@ interface CaseStudyBodyProps {
 }
 
 const richTextClass =
-  "text-body text-text-primary [&_p]:m-0 [&_p]:text-body [&_p]:text-text-primary [&_strong]:font-semibold [&_.font-semibold]:font-semibold [&_code]:rounded [&_code]:bg-neutral-100 [&_code]:px-1 [&_code]:py-0.5 [&_code]:text-sm";
+  "text-body text-text-primary [&_p]:m-0 [&_p]:text-body [&_p]:text-text-primary [&_strong]:font-semibold [&_.font-semibold]:font-semibold [&_code]:rounded [&_code]:bg-code-bg [&_code]:px-1 [&_code]:py-0.5 [&_code]:text-sm";
 
 function BackArrowIcon() {
   return (
@@ -31,7 +31,7 @@ function BackArrowIcon() {
       width="24"
       height="24"
       viewBox="0 0 24 24"
-      fill="#000000"
+      fill="currentColor"
       xmlns="http://www.w3.org/2000/svg"
       className="h-6 w-6 shrink-0"
       aria-hidden="true"
@@ -73,7 +73,7 @@ function BackButton({
   onClose?: () => void;
 }) {
   const className =
-    "inline-flex h-10 items-center gap-2 rounded-full bg-button-back pl-4 pr-5 text-base text-black shadow-[0_0_0_2px_rgba(255,255,255,0.1)] backdrop-blur-[4px] transition-colors duration-200 hover:bg-button-back-hover";
+    "inline-flex h-10 items-center gap-2 rounded-full bg-button-back pl-4 pr-5 text-base text-text-heading shadow-[0_0_0_2px_rgba(255,255,255,0.1)] backdrop-blur-[4px] transition-colors duration-200 hover:bg-button-back-hover";
 
   if (variant === "overlay") {
     return (
@@ -94,7 +94,7 @@ function BackButton({
 
 function ImagePlaceholder({ label }: { label: string }) {
   return (
-    <div className="flex h-[223px] w-full items-center justify-center rounded-3xl border border-black/[0.06] bg-surface-inset px-6 text-center text-sm text-neutral-400 shadow-[0_2px_8px_rgba(0,0,0,0.04),0_8px_32px_rgba(0,0,0,0.08)] tablet:h-[600px]">
+    <div className="flex h-[223px] w-full items-center justify-center rounded-3xl border border-border-card bg-surface-inset px-6 text-center text-sm text-neutral-400 shadow-card tablet:h-[600px]">
       <span>{label}</span>
     </div>
   );
@@ -154,7 +154,7 @@ function VideoPlayer({ src }: { src: string }) {
     timelineMax > 0 ? `${(Math.min(currentTime, timelineMax) / timelineMax) * 100}%` : "0%";
 
   return (
-    <div className="group relative w-full overflow-hidden rounded-3xl border border-black/[0.06] bg-surface-inset shadow-[0_2px_8px_rgba(0,0,0,0.04),0_8px_32px_rgba(0,0,0,0.08)]">
+    <div className="group relative w-full overflow-hidden rounded-3xl border border-border-card bg-surface-inset shadow-card">
       <video
         ref={videoRef}
         src={src}
@@ -288,7 +288,7 @@ function FullImage({ src, alt }: { src: string; alt: string }) {
     <img
       src={src}
       alt={alt}
-      className="block w-full rounded-3xl border border-black/[0.06] shadow-[0_2px_8px_rgba(0,0,0,0.04),0_8px_32px_rgba(0,0,0,0.08)]"
+      className="block w-full rounded-3xl border border-border-card shadow-card"
     />
   );
 }
@@ -465,7 +465,7 @@ export function CaseStudyBody({
           <BackButton variant={variant} onClose={onClose} />
         </div>
 
-        <main className="flex w-full flex-col gap-6 rounded-[48px] bg-white px-5 py-6 tablet:p-8">
+        <main className="flex w-full flex-col gap-6 rounded-[48px] bg-surface-primary px-5 py-6 tablet:p-8">
           <section className="flex flex-col gap-3">
             <h1 className="text-heading-1 font-semibold text-text-primary">
               {project.title}

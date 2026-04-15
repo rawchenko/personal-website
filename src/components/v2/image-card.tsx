@@ -25,7 +25,7 @@ export function ImageCard({ projectSlug, onImageClick }: ImageCardProps) {
       style={{ containerType: "inline-size" }}
     >
       <div
-        className="w-full h-full relative overflow-hidden rounded-3xl border border-black/[0.06] shadow-[0_2px_8px_rgba(0,0,0,0.04),0_8px_32px_rgba(0,0,0,0.08)]"
+        className="w-full h-full relative overflow-hidden rounded-3xl border border-border-card shadow-card"
         style={{ backgroundColor: "var(--color-surface-subtle)" }}
       >
         <Image
