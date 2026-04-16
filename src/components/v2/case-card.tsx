@@ -4,45 +4,28 @@ import Image from "next/image";
 import { useRef, useState, useEffect, useCallback } from "react";
 import { Dithering, GrainGradient, MeshGradient, DotGrid } from "@paper-design/shaders-react";
 import { getProjectBySlug } from "@/data/projects";
+import {
+  getProjectPreview,
+  type ShaderConfig,
+  type OverlayLayer,
+  type CarouselConfig,
+  type CaseImage,
+} from "@/data/project-previews";
 import { Card } from "./card";
-import { CarouselShaderSync, type CarouselSlide } from "./carousel-shader-sync";
+import { CarouselShaderSync } from "./carousel-shader-sync";
 
-interface CaseImage {
-  src: string;
-  alt: string;
-  width: number;
-  height: number;
-  style: React.CSSProperties;
-}
-
-export interface ShaderConfig {
-  type: "dithering" | "grain-gradient" | "mesh-gradient" | "dot-grid";
-  props: Record<string, unknown>;
-}
-
-export interface OverlayLayer {
-  style: React.CSSProperties;
-  className?: string;
-}
-
-export interface CarouselConfig {
-  slides: CarouselSlide[];
-  intervalMs?: number;
-  transitionMs?: number;
-  imageStyle: React.CSSProperties;
-}
+export type { ShaderConfig, OverlayLayer, CarouselConfig, CaseImage };
 
 interface CaseCardProps {
   projectSlug: string;
   label: string;
   description: string;
-  dark?: boolean;
-  background?: string;
-  shaderConfig?: ShaderConfig;
-  shaderClassName?: string;
-  images?: CaseImage[];
-  overlayLayers?: OverlayLayer[];
-  carousel?: CarouselConfig;
+  eager?: boolean;
+}
+
+interface ProjectPreviewProps {
+  projectSlug: string;
+  eager?: boolean;
 }
 
 function ShaderRenderer({ config, inView }: { config: ShaderConfig; inView: boolean }) {
@@ -61,20 +44,12 @@ function ShaderRenderer({ config, inView }: { config: ShaderConfig; inView: bool
   }
 }
 
-export function CaseCard({
-  projectSlug,
-  label,
-  description,
-  background,
-  shaderConfig,
-  shaderClassName,
-  images,
-  overlayLayers,
-  carousel,
-}: CaseCardProps) {
+export function ProjectPreview({ projectSlug, eager }: ProjectPreviewProps) {
   const project = getProjectBySlug(projectSlug);
+  const preview = getProjectPreview(projectSlug);
   const cardRef = useRef<HTMLDivElement>(null);
   const [inView, setInView] = useState(false);
+  const [hasBeenInView, setHasBeenInView] = useState(!!eager);
   const [dynamicColors, setDynamicColors] = useState<[string, string, string, string] | null>(null);
 
   const handleColorsChange = useCallback((colors: [string, string, string, string]) => {
@@ -84,14 +59,30 @@ export function CaseCard({
   useEffect(() => {
     const el = cardRef.current;
     if (!el) return;
+    if (typeof IntersectionObserver === "undefined") {
+      setInView(true);
+      setHasBeenInView(true);
+      return;
+    }
     const observer = new IntersectionObserver(
-      ([entry]) => setInView(entry.isIntersecting),
+      ([entry]) => {
+        setInView(entry.isIntersecting);
+        if (entry.isIntersecting) setHasBeenInView(true);
+      },
       { rootMargin: "200px" }
     );
     observer.observe(el);
     return () => observer.disconnect();
   }, []);
+
   if (!project) return null;
+
+  const background = preview?.background;
+  const shaderConfig = preview?.shaderConfig;
+  const shaderClassName = preview?.shaderClassName;
+  const images = preview?.images;
+  const overlayLayers = preview?.overlayLayers;
+  const carousel = preview?.carousel;
 
   const effectiveShaderConfig = shaderConfig
     ? dynamicColors
@@ -100,55 +91,69 @@ export function CaseCard({
     : undefined;
 
   return (
-    <Card href={`/work/${project.slug}`}>
-      <div
-        ref={cardRef}
-        className="relative w-full aspect-[960/600] overflow-hidden rounded-lg border border-border-card shadow-card"
-        style={{ background: background || "var(--color-card-dark)" }}
-      >
-        {effectiveShaderConfig && (
-          <div className={shaderClassName || "absolute inset-0"}>
-            <ShaderRenderer config={effectiveShaderConfig} inView={inView} />
-          </div>
-        )}
-        {overlayLayers?.map((layer, i) => (
-          <div
-            key={i}
-            className={layer.className}
-            style={layer.style}
-          />
-        ))}
-        {carousel ? (
-          <CarouselShaderSync
-            slides={carousel.slides}
-            intervalMs={carousel.intervalMs}
-            transitionMs={carousel.transitionMs}
-            imageStyle={carousel.imageStyle}
-            inView={inView}
-            onColorsChange={handleColorsChange}
-          />
-        ) : images ? (
-          images.map((img, i) => (
-            <Image
-              key={i}
-              src={img.src}
-              alt={img.alt}
-              width={img.width}
-              height={img.height}
-              className="absolute z-10 group-hover:scale-[1.02] transition-transform duration-300 origin-center"
-              style={img.style}
-            />
-          ))
-        ) : (
+    <div
+      ref={cardRef}
+      className="relative w-full aspect-[960/600] overflow-hidden rounded-lg border border-border-card shadow-card"
+      style={{ background: background || "var(--color-card-dark)" }}
+    >
+      {effectiveShaderConfig && hasBeenInView && (
+        <div className={shaderClassName || "absolute inset-0"}>
+          <ShaderRenderer config={effectiveShaderConfig} inView={inView} />
+        </div>
+      )}
+      {overlayLayers?.map((layer, i) => (
+        <div
+          key={i}
+          className={layer.className}
+          style={layer.style}
+        />
+      ))}
+      {carousel ? (
+        <CarouselShaderSync
+          slides={carousel.slides}
+          intervalMs={carousel.intervalMs}
+          transitionMs={carousel.transitionMs}
+          imageStyle={carousel.imageStyle}
+          inView={inView}
+          onColorsChange={handleColorsChange}
+        />
+      ) : images && images.length > 0 ? (
+        images.map((img, i) => (
           <Image
-            src={project.thumbnail}
-            alt={project.title}
-            fill
-            sizes="(max-width: 960px) 100vw, min(calc(100vw - 448px), 992px)"
-            className="object-cover z-10 group-hover:scale-[1.02] transition-transform duration-300"
+            key={i}
+            src={img.src}
+            alt={img.alt}
+            width={img.width}
+            height={img.height}
+            className="absolute z-10 group-hover:scale-[1.02] transition-transform duration-300 origin-center"
+            style={img.style}
           />
-        )}
-      </div>
+        ))
+      ) : !preview ? (
+        <Image
+          src={project.thumbnail}
+          alt={project.title}
+          fill
+          sizes="(max-width: 960px) 100vw, min(calc(100vw - 448px), 992px)"
+          className="object-cover z-10 group-hover:scale-[1.02] transition-transform duration-300"
+        />
+      ) : null}
+    </div>
+  );
+}
+
+export function CaseCard({
+  projectSlug,
+  label,
+  description,
+  eager,
+}: CaseCardProps) {
+  const project = getProjectBySlug(projectSlug);
+  if (!project) return null;
+
+  return (
+    <Card href={`/work/${project.slug}`}>
+      <ProjectPreview projectSlug={projectSlug} eager={eager} />
       {/* Info bar */}
       <div className="flex items-center justify-between pt-3">
         <div className="flex items-center gap-1">
