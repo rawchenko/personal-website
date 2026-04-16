@@ -3,7 +3,6 @@
 
 import type { ReactNode } from "react";
 import { useRef, useState } from "react";
-import Link from "next/link";
 import { getProjectBySlug } from "@/data/projects";
 import {
   getCaseStudyContent,
@@ -14,6 +13,7 @@ import {
 import { ZigzagDivider } from "./zigzag-divider";
 import { Button } from "./button";
 import { Heading } from "./heading";
+import { ProjectPreview } from "./case-card";
 
 interface CaseStudyBodyProps {
   slug: string;
@@ -28,12 +28,12 @@ const richTextClass =
 function BackArrowIcon() {
   return (
     <svg
-      width="24"
-      height="24"
+      width="16"
+      height="16"
       viewBox="0 0 24 24"
       fill="currentColor"
       xmlns="http://www.w3.org/2000/svg"
-      className="h-6 w-6 shrink-0"
+      className="h-4 w-4 shrink-0"
       aria-hidden="true"
     >
       <path
@@ -72,23 +72,26 @@ function BackButton({
   variant: "page" | "overlay";
   onClose?: () => void;
 }) {
-  const className =
-    "inline-flex h-10 items-center gap-2 rounded-full bg-button-back pl-4 pr-5 text-base text-text-heading shadow-[0_0_0_2px_rgba(255,255,255,0.1)] backdrop-blur-[4px] transition-colors duration-200 hover:bg-button-back-hover";
-
   if (variant === "overlay") {
     return (
-      <button onClick={onClose} className={className} aria-label="Go back">
-        <BackArrowIcon />
-        <span>Back</span>
-      </button>
+      <Button
+        variant="secondary"
+        label="Back"
+        icon={<BackArrowIcon />}
+        onClick={onClose ?? (() => {})}
+        className="px-5"
+      />
     );
   }
 
   return (
-    <Link href="/" className={className}>
-      <BackArrowIcon />
-      <span>Back</span>
-    </Link>
+    <Button
+      variant="secondary"
+      label="Back"
+      icon={<BackArrowIcon />}
+      href="/"
+      className="px-5"
+    />
   );
 }
 
@@ -466,6 +469,7 @@ export function CaseStudyBody({
         </div>
 
         <main className="flex w-full flex-col gap-6 rounded-[48px] bg-surface-primary px-5 py-6 tablet:p-8">
+          <ProjectPreview projectSlug={slug} eager />
           <section className="flex flex-col gap-3">
             <h1 className="text-heading-1 font-semibold text-text-primary">
               {project.title}
