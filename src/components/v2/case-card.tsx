@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { useRef, useState, useEffect, useCallback } from "react";
-import { Dithering, GrainGradient, MeshGradient } from "@paper-design/shaders-react";
+import { Dithering, GrainGradient, MeshGradient, DotGrid } from "@paper-design/shaders-react";
 import { getProjectBySlug } from "@/data/projects";
 import { Card } from "./card";
 import { CarouselShaderSync, type CarouselSlide } from "./carousel-shader-sync";
@@ -16,8 +16,13 @@ interface CaseImage {
 }
 
 export interface ShaderConfig {
-  type: "dithering" | "grain-gradient" | "mesh-gradient";
+  type: "dithering" | "grain-gradient" | "mesh-gradient" | "dot-grid";
   props: Record<string, unknown>;
+}
+
+export interface OverlayLayer {
+  style: React.CSSProperties;
+  className?: string;
 }
 
 export interface CarouselConfig {
@@ -34,7 +39,9 @@ interface CaseCardProps {
   dark?: boolean;
   background?: string;
   shaderConfig?: ShaderConfig;
+  shaderClassName?: string;
   images?: CaseImage[];
+  overlayLayers?: OverlayLayer[];
   carousel?: CarouselConfig;
 }
 
@@ -49,6 +56,8 @@ function ShaderRenderer({ config, inView }: { config: ShaderConfig; inView: bool
       return <GrainGradient {...props as React.ComponentProps<typeof GrainGradient>} />;
     case "mesh-gradient":
       return <MeshGradient {...props as React.ComponentProps<typeof MeshGradient>} />;
+    case "dot-grid":
+      return <DotGrid {...props as React.ComponentProps<typeof DotGrid>} />;
   }
 }
 
@@ -58,7 +67,9 @@ export function CaseCard({
   description,
   background,
   shaderConfig,
+  shaderClassName,
   images,
+  overlayLayers,
   carousel,
 }: CaseCardProps) {
   const project = getProjectBySlug(projectSlug);
@@ -92,10 +103,21 @@ export function CaseCard({
     <Card href={`/work/${project.slug}`}>
       <div
         ref={cardRef}
-        className="relative w-full aspect-[960/600] overflow-hidden rounded-3xl border border-border-card shadow-card"
+        className="relative w-full aspect-[960/600] overflow-hidden rounded-lg border border-border-card shadow-card"
         style={{ background: background || "var(--color-card-dark)" }}
       >
-        {effectiveShaderConfig && <ShaderRenderer config={effectiveShaderConfig} inView={inView} />}
+        {effectiveShaderConfig && (
+          <div className={shaderClassName || "absolute inset-0"}>
+            <ShaderRenderer config={effectiveShaderConfig} inView={inView} />
+          </div>
+        )}
+        {overlayLayers?.map((layer, i) => (
+          <div
+            key={i}
+            className={layer.className}
+            style={layer.style}
+          />
+        ))}
         {carousel ? (
           <CarouselShaderSync
             slides={carousel.slides}

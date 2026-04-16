@@ -94,7 +94,7 @@ function BackButton({
 
 function ImagePlaceholder({ label }: { label: string }) {
   return (
-    <div className="flex h-[223px] w-full items-center justify-center rounded-3xl border border-border-card bg-surface-inset px-6 text-center text-sm text-neutral-400 shadow-card tablet:h-[600px]">
+    <div className="flex h-[223px] w-full items-center justify-center rounded-lg border border-border-card bg-surface-inset px-6 text-center text-sm text-neutral-400 shadow-card tablet:h-[600px]">
       <span>{label}</span>
     </div>
   );
@@ -154,7 +154,7 @@ function VideoPlayer({ src }: { src: string }) {
     timelineMax > 0 ? `${(Math.min(currentTime, timelineMax) / timelineMax) * 100}%` : "0%";
 
   return (
-    <div className="group relative w-full overflow-hidden rounded-3xl border border-border-card bg-surface-inset shadow-card">
+    <div className="group relative w-full overflow-hidden rounded-lg border border-border-card bg-surface-inset shadow-card">
       <video
         ref={videoRef}
         src={src}
@@ -288,7 +288,7 @@ function FullImage({ src, alt }: { src: string; alt: string }) {
     <img
       src={src}
       alt={alt}
-      className="block w-full rounded-3xl border border-border-card shadow-card"
+      className="block w-full rounded-lg border border-border-card shadow-card"
     />
   );
 }

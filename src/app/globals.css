@@ -281,6 +281,22 @@ body {
   border-radius: 0.25rem;
 }
 
+@keyframes shader-drift {
+  0%, 100% {
+    transform: scale(1) translate(0, 0);
+  }
+  33% {
+    transform: scale(1.06) translate(-1%, 0.5%);
+  }
+  66% {
+    transform: scale(1.03) translate(0.5%, -0.5%);
+  }
+}
+
+.animate-shader-drift {
+  animation: shader-drift 25s ease-in-out infinite;
+}
+
 .hide-scrollbar {
   -ms-overflow-style: none;
   scrollbar-width: none;

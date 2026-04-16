@@ -5,7 +5,7 @@ import { AnimatePresence } from "framer-motion";
 import { AnimateIn } from "@/components/animate-in";
 import { Lightbox } from "@/components/lightbox";
 import { asset } from "@/lib/utils";
-import { CaseCard, type ShaderConfig, type CarouselConfig } from "./case-card";
+import { CaseCard, type ShaderConfig, type CarouselConfig, type OverlayLayer } from "./case-card";
 import { ImageCard } from "./image-card";
 import { ExperienceCard } from "./experience-card";
 import { ApplicationsCard } from "./applications-card";
@@ -26,7 +26,9 @@ interface CaseRow {
   dark?: boolean;
   background?: string;
   shaderConfig?: ShaderConfig;
+  shaderClassName?: string;
   images?: CaseImage[];
+  overlayLayers?: OverlayLayer[];
   carousel?: CarouselConfig;
 }
 
@@ -51,100 +53,103 @@ const rows: PortfolioRow[] = [
     projectSlug: "layersweep",
     label: "LayerSweep",
     description: "Figma Plugin",
-    background: "color(display-p3 0.945 0.945 0.945)",
+    background: "color(display-p3 0.293 0.618 0.957)",
     shaderConfig: {
-      type: "dithering",
+      type: "dot-grid",
       props: {
-        speed: 0.16,
-        shape: "ripple",
-        type: "2x2",
-        size: 2.4,
-        scale: 1.15,
+        size: 1.3,
+        gapY: 10,
+        gapX: 10,
+        strokeWidth: 0,
+        sizeRange: 1,
+        opacityRange: 1,
+        shape: "circle",
+        colorFill: "#FFFFFF",
+        colorStroke: "#FFAA00",
         colorBack: "#00000000",
-        colorFront: "#009CFF45",
-        style: { ...shaderStyle, backgroundColor: "color(display-p3 0.945 0.945 0.945)" },
+        style: { ...shaderStyle, backgroundColor: "color(display-p3 0.293 0.618 0.957)" },
       },
     },
-    images: [
+    shaderClassName: "absolute -inset-[4%] animate-shader-drift",
+    images: [],
+    overlayLayers: [
       {
-        src: asset("/images/projects/layersweep-scan.png"),
-        alt: "LayerSweep Scan view",
-        width: 366,
-        height: 465,
         style: {
-          left: "10.5%",
-          top: "11.2%",
-          width: "38.1%",
-          height: "auto",
-          borderRadius: 4,
-          boxShadow: "var(--shadow-card)",
-        },
-      },
-      {
-        src: asset("/images/projects/layersweep-swap.png"),
-        alt: "LayerSweep Swap view",
-        width: 366,
-        height: 465,
-        style: {
-          left: "51.4%",
-          top: "11.2%",
-          width: "38.1%",
-          height: "auto",
-          borderRadius: 4,
-          boxShadow: "var(--shadow-card)",
-        },
-      },
-    ],
-  },
-  {
-    type: "half",
-    left: { kind: "image", projectSlug: "soulmate" },
-    right: { kind: "image", projectSlug: "viante" },
-  },
-  {
-    type: "case",
-    projectSlug: "casino-brand",
-    label: "Swiper",
-    description: "Tiktok-style casino",
-    dark: true,
-    background: "color(display-p3 0.057 0.066 0.132)",
-    shaderConfig: {
-      type: "grain-gradient",
-      props: {
-        speed: 1.64,
-        scale: 1,
-        rotation: 196,
-        offsetX: 0,
-        offsetY: 0,
-        softness: 1,
-        intensity: 0,
-        noise: 0.09,
-        shape: "wave",
-        colors: ["#47F1A7", "#279769", "#0E3C8F"],
-        colorBack: "#00000000",
-        style: { ...shaderStyle, backgroundColor: "color(display-p3 0.057 0.066 0.132)" },
-      },
-    },
-    images: [
-      {
-        src: asset("/images/projects/casino-mockup.png"),
-        alt: "Swiper casino app interfaces",
-        width: 3840,
-        height: 2400,
-        style: {
+          position: "absolute",
           left: 0,
           top: 0,
+          width: "25%",
+          height: "100%",
+          backgroundImage: `url(${asset("/images/projects/layersweep-left-panel.png")})`,
+          backgroundSize: "cover",
+          backgroundPosition: "100%",
+          backdropFilter: "blur(4px)",
+          WebkitBackdropFilter: "blur(4px)",
+          zIndex: 5,
+        },
+      },
+      {
+        style: {
+          position: "absolute",
+          top: 0,
+          right: 0,
+          width: "25.1%",
+          height: "100%",
+          backgroundImage: `url(${asset("/images/projects/layersweep-right-panel.png")})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backdropFilter: "blur(4px)",
+          WebkitBackdropFilter: "blur(4px)",
+          zIndex: 5,
+        },
+      },
+      {
+        style: {
+          position: "absolute",
+          left: "50%",
+          top: "90.17%",
+          width: "42.3%",
+          height: "7.67%",
+          translate: "-50%",
+          backgroundImage: `url(${asset("/images/projects/layersweep-tools-bar.png")})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          borderRadius: 13,
+          backdropFilter: "blur(4px)",
+          WebkitBackdropFilter: "blur(4px)",
+          zIndex: 5,
+        },
+      },
+      {
+        style: {
+          position: "absolute",
+          left: 0,
+          bottom: 0,
           width: "100%",
           height: "100%",
-          objectFit: "cover" as const,
+          backgroundImage:
+            "linear-gradient(in oklab 180deg, oklab(100% 0 0 / 30%) 0%, oklab(100% 0 0 / 50%) 100%)",
+          zIndex: 6,
+        },
+      },
+      {
+        style: {
+          position: "absolute",
+          left: "50%",
+          top: "45.17%",
+          translate: "-50% -50%",
+          width: "35.3%",
+          aspectRatio: "339 / 430",
+          borderRadius: 10,
+          backgroundImage: `url(${asset("/images/projects/layersweep-plugin-ui.png")})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          boxShadow:
+            "#0000000F 0px 8px 16px -4px, #0000001A 0px 24px 48px -8px, #00000014 0px 48px 96px -16px",
+          zIndex: 7,
         },
       },
     ],
-  },
-  {
-    type: "half",
-    left: { kind: "image", projectSlug: "trading-app" },
-    right: { kind: "experience" },
   },
   {
     type: "case",
@@ -213,9 +218,59 @@ const rows: PortfolioRow[] = [
     },
   },
   {
+    type: "case",
+    projectSlug: "casino-brand",
+    label: "Swiper",
+    description: "Tiktok-style casino",
+    dark: true,
+    background: "color(display-p3 0.057 0.066 0.132)",
+    shaderConfig: {
+      type: "grain-gradient",
+      props: {
+        speed: 1.64,
+        scale: 1,
+        rotation: 196,
+        offsetX: 0,
+        offsetY: 0,
+        softness: 1,
+        intensity: 0,
+        noise: 0.09,
+        shape: "wave",
+        colors: ["#47F1A7", "#279769", "#0E3C8F"],
+        colorBack: "#00000000",
+        style: { ...shaderStyle, backgroundColor: "color(display-p3 0.057 0.066 0.132)" },
+      },
+    },
+    images: [
+      {
+        src: asset("/images/projects/casino-mockup.png"),
+        alt: "Swiper casino app interfaces",
+        width: 3840,
+        height: 2400,
+        style: {
+          left: 0,
+          top: 0,
+          width: "100%",
+          height: "100%",
+          objectFit: "cover" as const,
+        },
+      },
+    ],
+  },
+  {
     type: "half",
-    left: { kind: "image", projectSlug: "diary-app" },
+    left: { kind: "experience" },
     right: { kind: "applications" },
+  },
+  {
+    type: "half",
+    left: { kind: "image", projectSlug: "soulmate" },
+    right: { kind: "image", projectSlug: "viante" },
+  },
+  {
+    type: "half",
+    left: { kind: "image", projectSlug: "trading-app" },
+    right: { kind: "image", projectSlug: "diary-app" },
   },
   {
     type: "case",
@@ -279,7 +334,7 @@ export function Portfolio() {
 
   return (
     <>
-      <div className="flex flex-col gap-6">
+      <div className="flex flex-col gap-4">
         {rows.map((row, rowIdx) => {
           if (row.type === "case") {
             const idx = itemIndex++;
@@ -292,7 +347,9 @@ export function Portfolio() {
                   dark={row.dark}
                   background={row.background}
                   shaderConfig={row.shaderConfig}
+                  shaderClassName={row.shaderClassName}
                   images={row.images}
+                  overlayLayers={row.overlayLayers}
                   carousel={row.carousel}
                 />
               </AnimateIn>
@@ -305,7 +362,7 @@ export function Portfolio() {
           return (
             <div
               key={rowIdx}
-              className="flex flex-col tablet:flex-row gap-6"
+              className="flex flex-col tablet:flex-row gap-4"
             >
               <AnimateIn
                 delay={leftIdx * 0.04}
