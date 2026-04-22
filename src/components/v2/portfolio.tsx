@@ -34,14 +34,14 @@ const rows: PortfolioRow[] = [
   {
     type: "case",
     projectSlug: "brainrocket-showcase",
-    label: "Brainrocket",
+    label: "iGaming",
     description: "Showcase",
   },
   {
     type: "case",
     projectSlug: "casino-brand",
-    label: "Swiper",
-    description: "Tiktok-style casino",
+    label: "Shorts Casino",
+    description: "Tiktok-style brand",
   },
   {
     type: "half",

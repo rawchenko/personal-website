@@ -2,7 +2,7 @@
 /* eslint-disable @next/next/no-img-element */
 
 import type { ReactNode } from "react";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { getProjectBySlug } from "@/data/projects";
 import {
   getCaseStudyContent,
@@ -10,10 +10,15 @@ import {
   type CaseStudyMediaFrame,
   type CaseStudySection,
 } from "@/data/case-studies";
+import { getProjectPreview } from "@/data/project-previews";
 import { ZigzagDivider } from "./zigzag-divider";
 import { Button } from "./button";
 import { Heading } from "./heading";
 import { ProjectPreview } from "./case-card";
+import {
+  hasProjectAccess,
+  ProjectAccessDialog,
+} from "./project-access-dialog";
 
 interface CaseStudyBodyProps {
   slug: string;
@@ -453,6 +458,26 @@ export function CaseStudyBody({
 }: CaseStudyBodyProps) {
   const project = getProjectBySlug(slug);
   const content = getCaseStudyContent(slug);
+  const preview = getProjectPreview(slug);
+  const requiresAccess = !!preview?.access;
+  const [isUnlocked, setIsUnlocked] = useState(!requiresAccess);
+  const [isAccessDialogOpen, setIsAccessDialogOpen] = useState(requiresAccess);
+
+  useEffect(() => {
+    const rafId = requestAnimationFrame(() => {
+      if (!requiresAccess) {
+        setIsUnlocked(true);
+        setIsAccessDialogOpen(false);
+        return;
+      }
+
+      const unlocked = hasProjectAccess(slug);
+      setIsUnlocked(unlocked);
+      setIsAccessDialogOpen(!unlocked);
+    });
+
+    return () => cancelAnimationFrame(rafId);
+  }, [requiresAccess, slug]);
 
   if (!project || !content) return null;
 
@@ -460,6 +485,38 @@ export function CaseStudyBody({
   // TODO: Remove draft check once casino-brand content is complete
   const isDraft = content.status === "draft";
   const visibleSections = isDraft ? sections.slice(0, 1) : sections;
+
+  if (requiresAccess && !isUnlocked) {
+    return (
+      <div className="min-h-screen bg-surface-page">
+        <div className="mx-auto flex w-full flex-col items-start tablet:max-w-[992px]">
+          <div className="w-full px-5 py-4 tablet:px-8 tablet:py-6">
+            <BackButton variant={variant} onClose={onClose} />
+          </div>
+
+          <main className="flex w-full flex-col gap-6 rounded-[48px] bg-surface-primary px-5 py-6 tablet:p-8">
+            <button
+              type="button"
+              className="w-full text-left"
+              onClick={() => setIsAccessDialogOpen(true)}
+            >
+              <ProjectPreview projectSlug={slug} eager />
+            </button>
+          </main>
+        </div>
+        <ProjectAccessDialog
+          open={isAccessDialogOpen}
+          projectTitle={project.title}
+          slug={slug}
+          onClose={() => setIsAccessDialogOpen(false)}
+          onUnlock={() => {
+            setIsUnlocked(true);
+            setIsAccessDialogOpen(false);
+          }}
+        />
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-surface-page">
@@ -469,7 +526,7 @@ export function CaseStudyBody({
         </div>
 
         <main className="flex w-full flex-col gap-6 rounded-[48px] bg-surface-primary px-5 py-6 tablet:p-8">
-          <ProjectPreview projectSlug={slug} eager />
+          <ProjectPreview projectSlug={slug} eager showAccessOverlay={false} />
           <section className="flex flex-col gap-3">
             <h1 className="text-heading-1 font-semibold text-text-primary">
               {project.title}

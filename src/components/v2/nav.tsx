@@ -27,17 +27,6 @@ export function Nav() {
         home
       </Link>
 
-      <span className="relative">
-        <span className={cn(navItemClass, "text-text-disabled cursor-default")}>
-          thoughts
-        </span>
-        <span
-          className="absolute -top-3 left-1/2 -translate-x-1/2 -rotate-[1.5deg] bg-badge-bg text-badge-text text-[0.5rem] font-semibold tracking-snug leading-[0.625rem] px-[0.125rem] pt-[0.0625rem] pb-[0.125rem] rounded-[0.1875rem] shadow-sm whitespace-nowrap"
-        >
-          coming soon
-        </span>
-      </span>
-
       <ExternalLink
         href="https://linkedin.com/in/evgenii-kravchenko"
         className={cn(navItemClass, "text-text-nav-inactive hover:text-text-heading")}

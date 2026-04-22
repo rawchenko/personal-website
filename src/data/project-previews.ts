@@ -34,6 +34,10 @@ export interface ProjectPreviewConfig {
   images?: CaseImage[];
   overlayLayers?: OverlayLayer[];
   carousel?: CarouselConfig;
+  access?: {
+    label: string;
+    note: string;
+  };
 }
 
 const shaderStyle = {
@@ -146,6 +150,10 @@ export const projectPreviews: Record<string, ProjectPreviewConfig> = {
   "brainrocket-showcase": {
     dark: true,
     background: "black",
+    access: {
+      label: "NDA",
+      note: "Password access",
+    },
     shaderConfig: {
       type: "mesh-gradient",
       props: {
@@ -201,6 +209,10 @@ export const projectPreviews: Record<string, ProjectPreviewConfig> = {
   "casino-brand": {
     dark: true,
     background: "color(display-p3 0.057 0.066 0.132)",
+    access: {
+      label: "NDA",
+      note: "Password access",
+    },
     shaderConfig: {
       type: "grain-gradient",
       props: {
