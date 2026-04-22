@@ -1,6 +1,8 @@
 "use client";
 
 import Image from "next/image";
+import { useRouter } from "next/navigation";
+import { LockKey } from "@phosphor-icons/react";
 import { useRef, useState, useEffect, useCallback } from "react";
 import { Dithering, GrainGradient, MeshGradient, DotGrid } from "@paper-design/shaders-react";
 import { getProjectBySlug } from "@/data/projects";
@@ -13,6 +15,10 @@ import {
 } from "@/data/project-previews";
 import { Card } from "./card";
 import { CarouselShaderSync } from "./carousel-shader-sync";
+import {
+  hasProjectAccess,
+  ProjectAccessDialog,
+} from "./project-access-dialog";
 
 export type { ShaderConfig, OverlayLayer, CarouselConfig, CaseImage };
 
@@ -26,6 +32,7 @@ interface CaseCardProps {
 interface ProjectPreviewProps {
   projectSlug: string;
   eager?: boolean;
+  showAccessOverlay?: boolean;
 }
 
 function ShaderRenderer({ config, inView }: { config: ShaderConfig; inView: boolean }) {
@@ -44,7 +51,11 @@ function ShaderRenderer({ config, inView }: { config: ShaderConfig; inView: bool
   }
 }
 
-export function ProjectPreview({ projectSlug, eager }: ProjectPreviewProps) {
+export function ProjectPreview({
+  projectSlug,
+  eager,
+  showAccessOverlay = true,
+}: ProjectPreviewProps) {
   const project = getProjectBySlug(projectSlug);
   const preview = getProjectPreview(projectSlug);
   const cardRef = useRef<HTMLDivElement>(null);
@@ -60,9 +71,11 @@ export function ProjectPreview({ projectSlug, eager }: ProjectPreviewProps) {
     const el = cardRef.current;
     if (!el) return;
     if (typeof IntersectionObserver === "undefined") {
-      setInView(true);
-      setHasBeenInView(true);
-      return;
+      const rafId = requestAnimationFrame(() => {
+        setInView(true);
+        setHasBeenInView(true);
+      });
+      return () => cancelAnimationFrame(rafId);
     }
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -83,6 +96,7 @@ export function ProjectPreview({ projectSlug, eager }: ProjectPreviewProps) {
   const images = preview?.images;
   const overlayLayers = preview?.overlayLayers;
   const carousel = preview?.carousel;
+  const access = showAccessOverlay ? preview?.access : undefined;
 
   const effectiveShaderConfig = shaderConfig
     ? dynamicColors
@@ -93,51 +107,75 @@ export function ProjectPreview({ projectSlug, eager }: ProjectPreviewProps) {
   return (
     <div
       ref={cardRef}
-      className="relative w-full aspect-[960/600] overflow-hidden rounded-lg border border-border-card shadow-card"
-      style={{ background: background || "var(--color-card-dark)" }}
+      className="relative w-full aspect-[960/600] overflow-hidden rounded-lg border border-border-card bg-[#fbfbfa] shadow-card dark:bg-card-dark"
+      style={access ? undefined : { background: background || "var(--color-card-dark)" }}
     >
-      {effectiveShaderConfig && hasBeenInView && (
-        <div className={shaderClassName || "absolute inset-0"}>
-          <ShaderRenderer config={effectiveShaderConfig} inView={inView} />
+      {access && (
+        <div className="absolute inset-0 bg-[#fbfbfa] dark:bg-black" />
+      )}
+      <div
+        className={
+          access
+            ? "absolute inset-0 scale-[1.04] blur-2xl opacity-42 brightness-[1.22] contrast-70 saturate-[0.58] dark:opacity-60 dark:brightness-100 dark:contrast-100 dark:saturate-[0.45]"
+            : "absolute inset-0"
+        }
+      >
+        {effectiveShaderConfig && hasBeenInView && (
+          <div className={shaderClassName || "absolute inset-0"}>
+            <ShaderRenderer config={effectiveShaderConfig} inView={inView} />
+          </div>
+        )}
+        {overlayLayers?.map((layer, i) => (
+          <div
+            key={i}
+            className={layer.className}
+            style={layer.style}
+          />
+        ))}
+        {carousel ? (
+          <CarouselShaderSync
+            slides={carousel.slides}
+            intervalMs={carousel.intervalMs}
+            transitionMs={carousel.transitionMs}
+            imageStyle={carousel.imageStyle}
+            inView={inView}
+            onColorsChange={handleColorsChange}
+          />
+        ) : images && images.length > 0 ? (
+          images.map((img, i) => (
+            <Image
+              key={i}
+              src={img.src}
+              alt={img.alt}
+              width={img.width}
+              height={img.height}
+              className="absolute z-10 group-hover:scale-[1.02] transition-transform duration-300 origin-center"
+              style={img.style}
+            />
+          ))
+        ) : !preview ? (
+          <Image
+            src={project.thumbnail}
+            alt={project.title}
+            fill
+            sizes="(max-width: 960px) 100vw, min(calc(100vw - 448px), 992px)"
+            className="object-cover z-10 group-hover:scale-[1.02] transition-transform duration-300"
+          />
+        ) : null}
+      </div>
+      {access && (
+        <div className="absolute inset-0 z-20 bg-white/[0.14] backdrop-blur-md dark:bg-black/45 dark:backdrop-blur-md">
+          <div className="absolute left-4 top-4 rounded-full border border-black/[0.05] bg-white/[0.34] px-3 py-1 text-[11px] font-semibold leading-none text-neutral-700 backdrop-blur-lg dark:border-white/[0.14] dark:bg-white/[0.08] dark:text-white/90 tablet:left-6 tablet:top-6">
+            {access.label}
+          </div>
+          <div className="absolute inset-0 flex items-center justify-center">
+            <div className="flex items-center gap-2 rounded-lg border border-black/[0.05] bg-white/[0.36] px-4 py-3 text-sm font-medium text-neutral-700 backdrop-blur-lg dark:border-white/[0.12] dark:bg-black/[0.28] dark:text-white/[0.88]">
+              <LockKey size={18} weight="bold" aria-hidden />
+              <span>{access.note}</span>
+            </div>
+          </div>
         </div>
       )}
-      {overlayLayers?.map((layer, i) => (
-        <div
-          key={i}
-          className={layer.className}
-          style={layer.style}
-        />
-      ))}
-      {carousel ? (
-        <CarouselShaderSync
-          slides={carousel.slides}
-          intervalMs={carousel.intervalMs}
-          transitionMs={carousel.transitionMs}
-          imageStyle={carousel.imageStyle}
-          inView={inView}
-          onColorsChange={handleColorsChange}
-        />
-      ) : images && images.length > 0 ? (
-        images.map((img, i) => (
-          <Image
-            key={i}
-            src={img.src}
-            alt={img.alt}
-            width={img.width}
-            height={img.height}
-            className="absolute z-10 group-hover:scale-[1.02] transition-transform duration-300 origin-center"
-            style={img.style}
-          />
-        ))
-      ) : !preview ? (
-        <Image
-          src={project.thumbnail}
-          alt={project.title}
-          fill
-          sizes="(max-width: 960px) 100vw, min(calc(100vw - 448px), 992px)"
-          className="object-cover z-10 group-hover:scale-[1.02] transition-transform duration-300"
-        />
-      ) : null}
     </div>
   );
 }
@@ -148,11 +186,18 @@ export function CaseCard({
   description,
   eager,
 }: CaseCardProps) {
+  const router = useRouter();
   const project = getProjectBySlug(projectSlug);
+  const preview = getProjectPreview(projectSlug);
+  const [isAccessDialogOpen, setIsAccessDialogOpen] = useState(false);
+
   if (!project) return null;
 
-  return (
-    <Card href={`/work/${project.slug}`}>
+  const href = `/work/${project.slug}`;
+  const access = preview?.access;
+
+  const cardContent = (
+    <>
       <ProjectPreview projectSlug={projectSlug} eager={eager} />
       {/* Info bar */}
       <div className="flex items-center justify-between pt-3">
@@ -182,6 +227,41 @@ export function CaseCard({
           </svg>
         </div>
       </div>
+    </>
+  );
+
+  if (access) {
+    return (
+      <>
+        <Card
+          onClick={() => {
+            if (hasProjectAccess(project.slug)) {
+              router.push(href);
+              return;
+            }
+
+            setIsAccessDialogOpen(true);
+          }}
+        >
+          {cardContent}
+        </Card>
+        <ProjectAccessDialog
+          open={isAccessDialogOpen}
+          projectTitle={project.title}
+          slug={project.slug}
+          onClose={() => setIsAccessDialogOpen(false)}
+          onUnlock={() => {
+            setIsAccessDialogOpen(false);
+            router.push(href);
+          }}
+        />
+      </>
+    );
+  }
+
+  return (
+    <Card href={href}>
+      {cardContent}
     </Card>
   );
 }

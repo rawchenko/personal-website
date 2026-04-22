@@ -71,8 +71,8 @@ export function CarouselShaderSync({
   onColorsChange,
 }: CarouselShaderSyncProps) {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [isSnapping, setIsSnapping] = useState(false);
   const prevSlideRef = useRef(0);
-  const isSnapping = useRef(false);
   const totalSlides = slides.length;
 
   // Interpolation state
@@ -93,7 +93,7 @@ export function CarouselShaderSync({
 
   // Trigger color interpolation on slide change
   useEffect(() => {
-    if (isSnapping.current) return;
+    if (isSnapping) return;
     const fromIdx = prevSlideRef.current % totalSlides;
     const toIdx = currentSlide >= totalSlides ? 0 : currentSlide % totalSlides;
     interpRef.current = {
@@ -102,7 +102,7 @@ export function CarouselShaderSync({
       to: slides[toIdx].shaderColors,
     };
     prevSlideRef.current = currentSlide;
-  }, [currentSlide, totalSlides, slides]);
+  }, [currentSlide, totalSlides, slides, isSnapping]);
 
   // rAF color interpolation loop
   useEffect(() => {
@@ -129,11 +129,11 @@ export function CarouselShaderSync({
   // Snap back to 0 after reaching clone slide
   const handleAnimationComplete = useCallback(() => {
     if (currentSlide >= totalSlides) {
-      isSnapping.current = true;
+      setIsSnapping(true);
       setCurrentSlide(0);
       // Reset snapping flag after React commits the instant update
       requestAnimationFrame(() => {
-        isSnapping.current = false;
+        setIsSnapping(false);
       });
     }
   }, [currentSlide, totalSlides]);
@@ -145,7 +145,7 @@ export function CarouselShaderSync({
       <motion.div
         animate={{ y: `${-currentSlide * (100 / slideCount)}%` }}
         transition={
-          isSnapping.current
+          isSnapping
             ? { duration: 0 }
             : { duration: transitionMs / 1000, ease: [...SLIDE_EASE] }
         }

@@ -82,18 +82,22 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
 
   // Initialize from localStorage + system preference on mount
   useEffect(() => {
-    const stored = localStorage.getItem("theme") as Theme | null;
-    const preference = stored === "light" || stored === "dark" || stored === "system"
-      ? stored
-      : "system";
+    const rafId = requestAnimationFrame(() => {
+      const stored = localStorage.getItem("theme") as Theme | null;
+      const preference = stored === "light" || stored === "dark" || stored === "system"
+        ? stored
+        : "system";
 
-    setThemeState(preference);
+      setThemeState(preference);
 
-    const resolved = preference === "system" ? getSystemTheme() : preference;
-    setResolvedTheme(resolved);
-    applyTheme(resolved);
+      const resolved = preference === "system" ? getSystemTheme() : preference;
+      setResolvedTheme(resolved);
+      applyTheme(resolved);
 
-    setMounted(true);
+      setMounted(true);
+    });
+
+    return () => cancelAnimationFrame(rafId);
   }, []);
 
   // Listen for OS preference changes when in "system" mode
